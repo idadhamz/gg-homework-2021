@@ -1,0 +1,53 @@
+.playlist {
+    display: flex;
+    flex-direction: row;
+}
+
+.playlist-item {
+    max-width: 500px;
+    max-height: auto;
+    width: fit-content;
+    height: fit-content;
+
+    padding: 2rem;
+    margin: 2rem auto;
+
+    border: 1px solid gainsboro;
+}
+
+.img-div {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+}
+
+.title-item {
+    font-size: 1.5rem;
+}
+
+.artists-item, .album-item {
+    font-size: 1.2rem;
+}
+
+.a-item {
+    border: none;
+    background-color: #00A512;
+    color: white;
+
+    padding: 10px 15px;
+    margin: 2rem auto;
+    text-decoration: none;
+    border-radius: 2rem;
+
+    width: 50%;
+}
+
+.a-item:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.a-item a {
+    color: white;
+    text-decoration: none;
+}
