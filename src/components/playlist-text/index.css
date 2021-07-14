@@ -1,0 +1,11 @@
+.text-item {
+    margin: 3rem 0;
+}
+
+.title-item {
+    font-size: 1.4rem;
+}
+
+.artists-item, .album-item {
+    font-size: 1.2rem;
+}

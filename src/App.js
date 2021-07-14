@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 
 // Pages
-import Home from './pages/home';
+import Playlist from './pages/playlist';
 
 const App = () => {
   return (
     <div className="App">
-      <Home />
+      <Playlist />
     </div>
   );
 }
