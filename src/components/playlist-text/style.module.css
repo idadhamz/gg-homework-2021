@@ -1,14 +1,14 @@
-.text-item {
+.text_item {
     margin: 3rem 0;
 
     border: 1.5px solid cadetblue;
     padding: 2rem;
 }
 
-.title-item {
+.title_item {
     font-size: 1.4rem;
 }
 
-.artists-item, .album-item {
+.artists_item, .album_item {
     font-size: 1.2rem;
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import './index.css'
+import style from './style.module.css';
 
 // Components
 import PlaylistItem from '../../components/playlist-item';
@@ -9,10 +9,10 @@ import data from '../../data/index';
 
 const index = () => {
     return (
-        <div class="playlist">
+        <div className={style.playlist}>
             <h1>Data Playlist</h1>
 
-            <div className="list-playlist">
+            <div className={style.list_playlist}>
                 <PlaylistItem data={data} />
                 <PlaylistItem data={data} />
             </div>

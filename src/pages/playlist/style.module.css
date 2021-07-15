@@ -12,7 +12,7 @@ h1 {
     margin: 2rem 0;
 }
 
-.list-playlist {
+.list_playlist {
     display: flex;
     flex-direction: row;
     
