@@ -1,14 +1,25 @@
 .text_item {
-    margin: 3rem 0;
+    padding: 1rem 2rem;
 
-    border: 1.5px solid cadetblue;
-    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    gap: 0 2rem;
+    width: 500px;
 }
 
 .title_item {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    margin: 0;
 }
 
-.artists_item, .album_item {
-    font-size: 1.2rem;
+.artists_item {
+    font-size: 1.1rem;
+    opacity: 0.7;
+
+    padding: 0.5rem 0;
+
+    margin: 0;
 }

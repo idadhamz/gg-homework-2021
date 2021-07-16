@@ -1,5 +1,8 @@
 .img_div {
     object-fit: cover;
-    width: 250px;
-    height: 250px;
+    width: 100px;
+    height: 100px;
+
+    margin: 2rem;
+    border-radius: 2rem;
 }

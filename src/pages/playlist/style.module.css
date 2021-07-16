@@ -1,20 +1,42 @@
 .playlist {
-    border: 1.5px solid greenyellow;
-
-    padding: 2rem;
     margin: 0 auto;
-
-    width: fit-content;
-    height: auto;
 }
 
-h1 {
-    margin: 2rem 0;
+.container {
+    padding: 0 10rem;
+}
+
+.title {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.title h1 {
+    color: black;
+    margin: 3rem 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.title input {
+    margin: 3rem 0;
+    padding: 0.8rem 2rem;
+
+    width: 300px;
+
+    border-radius: 20px;
+    border: 1.7px solid gainsboro;
+
+    font-size: 1.1rem;
+    font-weight: normal;
 }
 
 .list_playlist {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     
     gap: 2rem;
+    margin: 2rem 0;
 }

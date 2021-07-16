@@ -1,11 +1,15 @@
 .playlist_item {
-    max-width: 500px;
-    max-height: auto;
-    width: fit-content;
-    height: fit-content;
+    display: flex;
+    flex-direction: row;
 
-    padding: 2rem;
-    margin: 2rem auto;
+    align-items: center;
 
-    border: 1.5px solid blueviolet;
+    width: auto;
+    height: auto;
+
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
 }
