@@ -13,6 +13,12 @@ const index = () => {
 
     dataItem = data
 
+    const listPlaylist = dataItem.map((item, idx) => {
+        return(
+            dataItem && <PlaylistItem data={item} key={idx} idx={idx} />
+        )
+    })
+
     return (
         <div className={style.playlist}>
             <div className={style.container}>
@@ -22,7 +28,8 @@ const index = () => {
                 </div>
 
                 <div className={style.list_playlist}>
-                    <PlaylistItem data={dataItem} />
+                    {/* <PlaylistItem data={dataItem} /> */}
+                    {listPlaylist}
                 </div>
             </div>
         </div>
