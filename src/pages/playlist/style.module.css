@@ -28,15 +28,6 @@
     margin: 2rem 0;
 }
 
-.list_playlist h1 {
-    color: black;
-    margin: 3rem 0;
-    font-size: 1.8rem;
-    font-weight: bold;
-
-    text-align: center;
-}
-
 .list_playlist input {
     margin: 3rem 0;
     padding: 15px;

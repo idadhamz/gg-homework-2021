@@ -5,9 +5,6 @@ import style from './style.module.css';
 import PlaylistItem from '../../components/playlist-item';
 import Button from '../../components/Button';
 
-// Data
-import data from '../../data/index';
-
 const index = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -17,8 +14,13 @@ const index = () => {
     const [input, setInput] = useState('')
 
     useEffect(() => {
-        if(code === null){
-            getCode()
+        const payload = callback()
+        if(payload) {
+            setCode(payload)
+            setIsLoggedIn(true)
+        } else {
+            setCode(null)
+            setIsLoggedIn(false)
         }
     }, [])
 
@@ -30,7 +32,7 @@ const index = () => {
 
         const CLIENT_ID = process.env.REACT_APP_SPOTIFY_ID
 
-        let URL = `${AUTHORIZE}?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URL}&show_dialog=true&scope=user-read-private%20user-read-email`
+        let URL = `${AUTHORIZE}?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URL}&show_dialog=true&scope=user-read-private%20user-read-email`
 
         console.log(URL)
 
@@ -46,44 +48,35 @@ const index = () => {
         window.location.href = 'http://localhost:3001/'
     }
 
-    const getCode = () => {
-        var codeValue = null
-        const queryString = window.location.search
-        if(queryString.length > 0){
-            const urlParams = new URLSearchParams(queryString)
-            codeValue = urlParams.get('code')
-        } else {
-            codeValue = null
+    const callback = () => {
+        let hashParams = {};
+        let e,
+            r = /([^&;=]+)=?([^&;]*)/g,
+            q = window.location.hash.substring(1);
+        while ((e = r.exec(q))) {
+            hashParams[e[1]] = decodeURIComponent(e[2]);
         }
-
-        setCode(codeValue)
-        if(codeValue !== null) {
-            setIsLoggedIn(true)
-        } else {
-            setIsLoggedIn(false)
-        }
-    }
+        return hashParams.access_token && hashParams;
+    };
 
     const playlistView = () => {
         return(
             <>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <input type="text" name="title" id="title" className="title" placeholder="Search Song Title" onChange={(e) => handleChange(e)} value={input} autoComplete="off" />
+                    <input type="text" name="title" id="title" className="title" placeholder="Search Song Title" onChange={(e) => handleChange(e)} value={input} autoComplete="off" required />
                     <Button type="submit" style={{ margin: '0 1rem' }}>Search</Button>
                 </form>
 
-                {/* {listSong} */}
+                {listSong}
             </>
         )
     }
 
-    // const listSong = song.map((item, idx) => {
-    //     return(
-    //         <div className={style.playlist_item} key={idx}>
-    //             <h1>{item.name}</h1>
-    //         </div>
-    //     )
-    // })
+    const listSong = song.map((item, idx) => {
+        return(
+            <PlaylistItem data={item} key={idx} idx={idx} />
+        )
+    })
 
     const handleChange = (e) => {
         setInput(e.target.value)
@@ -93,8 +86,8 @@ const index = () => {
         e.preventDefault()
 
         const songItem = await fetch(
-            `https://api.spotify.com/v1/search?q=${input}&type=artist&limit=10`, {headers: {
-                'Authorization': 'Bearer ' + `${code}`,
+            `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`, {headers: {
+                'Authorization': 'Bearer ' + `${code.access_token}`,
                 'Content-Type': 'application/json',
             }
         }).then(response => response.json())
@@ -102,7 +95,7 @@ const index = () => {
         console.log(code)
         console.log(songItem)
 
-        // setSong(songItem.artists.items)
+        setSong(songItem.tracks.items)
     }
 
     const nullPlaylistView = <h1>Tidak ada data</h1>
