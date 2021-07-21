@@ -15,18 +15,18 @@ import data from '../../data/index';
 const index = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [code, setCode] = useState(null)
+    const [token, setToken] = useState(null)
     
     const [song, setSong] = useState(data)
     const [input, setInput] = useState('')
 
     useEffect(() => {
-        const payload = getParams()
-        if(payload) {
-            setCode(payload)
+        const params = getParams()
+        if(params) {
+            setToken(params)
             setIsLoggedIn(true)
         } else {
-            setCode(null)
+            setToken(null)
             setIsLoggedIn(false)
         }
     }, [])
@@ -54,7 +54,7 @@ const index = () => {
         
         const songItem = await fetch(
             `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`, {headers: {
-                'Authorization': 'Bearer ' + `${code.access_token}`,
+                'Authorization': 'Bearer ' + `${token.access_token}`,
                 'Content-Type': 'application/json',
             }
         }).then(response => response.json())
@@ -78,7 +78,7 @@ const index = () => {
         e.preventDefault()
     
         setIsLoggedIn(false)
-        setCode(null)
+        setToken(null)
     
         window.location.href = 'http://localhost:3001/'
     }
