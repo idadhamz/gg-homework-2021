@@ -2,22 +2,21 @@
     margin: 0 auto;
 }
 
-.container {
-    padding: 0 10rem;
-}
-
 .title {
     display: flex;
     flex-direction: row;
 
     justify-content: space-between;
+
+    padding: 0 10rem;
+    border-bottom: 1px solid #d9dadc;
 }
 
 .title h1 {
     color: black;
     margin: 3rem 0;
     font-size: 1.8rem;
-    font-weight: bold;
+    font-weight: 800;
 }
 
 .list_playlist {
@@ -26,17 +25,44 @@
     
     gap: 2rem;
     margin: 2rem 0;
+
+    padding: 0 10rem;
 }
 
 .list_playlist input {
     margin: 3rem 0;
-    padding: 15px;
+    padding: 1em 1.5em;
 
     width: 300px;
 
     border-radius: 20px;
-    border: 2px solid gainsboro;
+    border: 1.5px solid gainsboro;
 
     font-size: 1.1rem;
     font-weight: normal;
+
+    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+}
+
+.list_playlist input:focus {
+    outline: none !important;
+    border: 2px solid #4DC05A;
+}
+
+.list_playlist .h1_null {
+    font-size: 1.3rem;
+    padding: 2rem;
+    margin: 2rem auto;
+
+    border-radius: 50px;
+    border: 1px solid #d9dadc;
+    color: #333;
+
+    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+
+    width: fit-content;
 }

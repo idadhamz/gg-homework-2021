@@ -5,16 +5,23 @@ import style from './style.module.css';
 import PlaylistItem from '../../components/playlist-item';
 import Button from '../../components/Button';
 
+// Utils
+import getParams from '../../utils/getParams';
+import requestAuth from '../../utils/requestAuth';
+
+// Data
+import data from '../../data/index';
+
 const index = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [code, setCode] = useState(null)
     
-    const [song, setSong] = useState([])
+    const [song, setSong] = useState(data)
     const [input, setInput] = useState('')
 
     useEffect(() => {
-        const payload = callback()
+        const payload = getParams()
         if(payload) {
             setCode(payload)
             setIsLoggedIn(true)
@@ -24,59 +31,19 @@ const index = () => {
         }
     }, [])
 
-    const requestAuth = (e) => {
-        e.preventDefault()
-
-        const AUTHORIZE = 'https://accounts.spotify.com/authorize'
-        const REDIRECT_URL = 'http://localhost:3001/'
-
-        const CLIENT_ID = process.env.REACT_APP_SPOTIFY_ID
-
-        let URL = `${AUTHORIZE}?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${REDIRECT_URL}&show_dialog=true&scope=user-read-private%20user-read-email`
-
-        console.log(URL)
-
-        window.location.href = URL
-    }
-
-    const deleteAuth = (e) => {
-        e.preventDefault()
-
-        setIsLoggedIn(false)
-        setCode(null)
-
-        window.location.href = 'http://localhost:3001/'
-    }
-
-    const callback = () => {
-        let hashParams = {};
-        let e,
-            r = /([^&;=]+)=?([^&;]*)/g,
-            q = window.location.hash.substring(1);
-        while ((e = r.exec(q))) {
-            hashParams[e[1]] = decodeURIComponent(e[2]);
-        }
-        return hashParams.access_token && hashParams;
-    };
-
     const playlistView = () => {
+
         return(
             <>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <input type="text" name="title" id="title" className="title" placeholder="Search Song Title" onChange={(e) => handleChange(e)} value={input} autoComplete="off" required />
+                    <input type="text" name="title" id="title" className="title" placeholder="Search Song Title" onChange={(e) => handleChange(e)} value={input} autoComplete="off" />
                     <Button type="submit" style={{ margin: '0 1rem' }}>Search</Button>
                 </form>
 
-                {listSong}
+                { song.map((item, idx) => <PlaylistItem data={item} key={idx} idx={idx} />) }
             </>
         )
     }
-
-    const listSong = song.map((item, idx) => {
-        return(
-            <PlaylistItem data={item} key={idx} idx={idx} />
-        )
-    })
 
     const handleChange = (e) => {
         setInput(e.target.value)
@@ -84,7 +51,7 @@ const index = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        
         const songItem = await fetch(
             `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`, {headers: {
                 'Authorization': 'Bearer ' + `${code.access_token}`,
@@ -92,25 +59,39 @@ const index = () => {
             }
         }).then(response => response.json())
 
-        console.log(code)
-        console.log(songItem)
-
-        setSong(songItem.tracks.items)
+        if(input !== '') {
+            setSong(songItem.tracks.items)
+        } else {
+            setSong(data)
+        }
     }
 
-    const nullPlaylistView = <h1>Tidak ada data</h1>
+    const nullPlaylistView = () => {
+        return(
+            <>
+                <h1 className={style.h1_null}>Data not available</h1>
+            </>
+        )
+    }
+
+    const logoutAction = (e) => {
+        e.preventDefault()
+    
+        setIsLoggedIn(false)
+        setCode(null)
+    
+        window.location.href = 'http://localhost:3001/'
+    }
 
     return (
         <div className={style.playlist}>
-            <div className={style.container}>
-                <div className={style.title}>
-                    <h1>Spotify Clone</h1>
-                    { isLoggedIn ?  <Button onClick={(e) => deleteAuth(e)}>Logout Spotify</Button> : <Button onClick={(e) => requestAuth(e)}>Login on Spotify</Button>}
-                </div>
+            <div className={style.title}>
+                <h1>Spotify</h1>
+                { isLoggedIn ?  <Button onClick={(e) => logoutAction(e)}>Logout In Spotify</Button> : <Button onClick={(e) => requestAuth(e)}>Login On Spotify</Button>}
+            </div>
 
-                <div className={style.list_playlist}>
-                    { isLoggedIn ? playlistView() : nullPlaylistView }
-                </div>
+            <div className={style.list_playlist}>
+                { isLoggedIn ? playlistView() : nullPlaylistView() }
             </div>
         </div>
     )

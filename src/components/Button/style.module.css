@@ -3,13 +3,17 @@
     background-color: #00A512;
     color: white;
 
-    padding: 15px;
+    padding: 1em 1.5em;
     text-decoration: none;
     border-radius: 2rem;
 
-    width: 20%;
+    width: auto;
     height: fit-content;
     align-self: center;
+
+    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
 }
 
 .button:hover {

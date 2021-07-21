@@ -8,11 +8,16 @@
     height: auto;
     padding: 0 2rem;
 
-    border: 1px solid gainsboro;
+    border: 1px solid #d9dadc;
     border-radius: 10px;
     box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
     -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
     -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+}
+
+.playlist_item:hover {
+    background-color: whitesmoke;
+    transition: all .15s ease;
 }
 
 .playlist_item .h1 {
@@ -21,7 +26,7 @@
     text-align: center;
 
     background-color: #00A512;
-    color: white;
+    color: #d9dadc;
 
     margin-right: 2rem;
     padding: 1rem;
