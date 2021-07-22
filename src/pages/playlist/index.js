@@ -8,6 +8,7 @@ import Button from '../../components/Button';
 // Utils
 import getParams from '../../utils/getParams';
 import requestAuth from '../../utils/requestAuth';
+import { selectPlaylist } from '../../utils/selectPlaylist';
 
 // Data
 import data from '../../data/index';
@@ -17,8 +18,10 @@ const index = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [token, setToken] = useState(null)
     
-    const [song, setSong] = useState(data)
+    const [track, setTrack] = useState([])
     const [input, setInput] = useState('')
+
+    const {checkSelected, handleSelect} = selectPlaylist()
 
     useEffect(() => {
         const params = getParams()
@@ -36,11 +39,11 @@ const index = () => {
         return(
             <>
                 <form onSubmit={(e) => handleSubmit(e)}>
-                    <input type="text" name="title" id="title" className="title" placeholder="Search Song Title" onChange={(e) => handleChange(e)} value={input} autoComplete="off" />
+                    <input type="text" name="title" id="title" className="title" placeholder="Search Track Title" onChange={(e) => handleChange(e)} value={input} autoComplete="off" />
                     <Button type="submit" style={{ margin: '0 1rem' }}>Search</Button>
                 </form>
 
-                { song.map((item, idx) => <PlaylistItem data={item} key={idx} idx={idx} />) }
+                { track.map((item, idx) => <PlaylistItem data={item} key={item.id} idx={idx} handleSelect={handleSelect} isSelected={checkSelected(item.uri)} />) }
             </>
         )
     }
@@ -52,7 +55,7 @@ const index = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         
-        const songItem = await fetch(
+        const trackItem = await fetch(
             `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`, {headers: {
                 'Authorization': 'Bearer ' + `${token.access_token}`,
                 'Content-Type': 'application/json',
@@ -60,9 +63,9 @@ const index = () => {
         }).then(response => response.json())
 
         if(input !== '') {
-            setSong(songItem.tracks.items)
+            setTrack(trackItem.tracks.items)
         } else {
-            setSong(data)
+            setTrack([])
         }
     }
 
