@@ -1,0 +1,26 @@
+.label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.input {
+    margin: 1rem 0;
+    padding: 1em 1.5em;
+
+    width: 300px;
+
+    border-radius: 20px;
+    border: 1.5px solid gainsboro;
+
+    font-size: 1.1rem;
+    font-weight: normal;
+
+    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+}
+
+.input:focus {
+    outline: none !important;
+    border: 2px solid #4DC05A;
+}

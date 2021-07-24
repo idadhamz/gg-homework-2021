@@ -1,103 +1,184 @@
-import React, { useState, useEffect } from 'react'
-import style from './style.module.css';
+import React, { useState, useEffect } from "react";
+import style from "./style.module.css";
 
 // Components
-import PlaylistItem from '../../components/playlist-item';
-import Button from '../../components/Button';
+import PlaylistForm from "../../components/playlist-form";
+import PlaylistSearch from "../../components/playlist-search";
+import PlaylistItem from "../../components/playlist-item";
+import Button from "../../components/Button";
 
 // Utils
-import getParams from '../../utils/getParams';
-import requestAuth from '../../utils/requestAuth';
-import { selectPlaylist } from '../../utils/selectPlaylist';
-
-// Data
-import data from '../../data/index';
+import getParams from "../../utils/getParams";
+import requestAuth from "../../utils/requestAuth";
+import { selectPlaylist } from "../../utils/selectPlaylist";
 
 const index = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState("");
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [token, setToken] = useState(null)
-    
-    const [track, setTrack] = useState([])
-    const [input, setInput] = useState('')
+  const [track, setTrack] = useState([]);
+  const [input, setInput] = useState("");
 
-    const {checkSelected, handleSelect} = selectPlaylist()
+  const [playlists, setPlaylists] = useState([]);
+  const [formPlaylist, setFormPlaylist] = useState({
+    title: "",
+    desc: "",
+  });
 
-    useEffect(() => {
-        const params = getParams()
-        if(params) {
-            setToken(params)
-            setIsLoggedIn(true)
-        } else {
-            setToken(null)
-            setIsLoggedIn(false)
-        }
-    }, [])
+  const { checkSelected, handleSelect } = selectPlaylist();
 
-    const playlistView = () => {
+  useEffect(() => {
+    const params = getParams();
+    if (params) {
+      setToken(params);
+      setIsLoggedIn(true);
 
-        return(
-            <>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <input type="text" name="title" id="title" className="title" placeholder="Search Track Title" onChange={(e) => handleChange(e)} value={input} autoComplete="off" />
-                    <Button type="submit" style={{ margin: '0 1rem' }}>Search</Button>
-                </form>
-
-                { track.map((item, idx) => <PlaylistItem data={item} key={item.id} idx={idx} handleSelect={handleSelect} isSelected={checkSelected(item.uri)} />) }
-            </>
-        )
+      getUserProfile(params);
+      getUserPlaylists(params);
+    } else {
+      setToken(null);
+      setIsLoggedIn(false);
     }
+  }, []);
 
-    const handleChange = (e) => {
-        setInput(e.target.value)
-    }
+  const getUserProfile = async (params) => {
+    const valueUser = await fetch(`https://api.spotify.com/v1/me`, {
+      headers: {
+        Authorization: "Bearer " + `${params.access_token}`,
+        "Content-Type": "application/json",
+      },
+    }).then((response) => response.json());
+    setUser(valueUser);
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        
-        const trackItem = await fetch(
-            `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`, {headers: {
-                'Authorization': 'Bearer ' + `${token.access_token}`,
-                'Content-Type': 'application/json',
-            }
-        }).then(response => response.json())
+  const getUserPlaylists = async (params) => {
+    const playlists = await fetch(`https://api.spotify.com/v1/me/playlists`, {
+      headers: {
+        Authorization: "Bearer " + `${params.access_token}`,
+        "Content-Type": "application/json",
+      },
+    }).then((response) => response.json());
+    setPlaylists(playlists);
+  };
 
-        if(input !== '') {
-            setTrack(trackItem.tracks.items)
-        } else {
-            setTrack([])
-        }
-    }
+  console.log(playlists);
 
-    const nullPlaylistView = () => {
-        return(
-            <>
-                <h1 className={style.h1_null}>Data not available</h1>
-            </>
-        )
-    }
-
-    const logoutAction = (e) => {
-        e.preventDefault()
-    
-        setIsLoggedIn(false)
-        setToken(null)
-    
-        window.location.href = 'http://localhost:3001/'
-    }
-
+  const playlistView = () => {
     return (
-        <div className={style.playlist}>
-            <div className={style.title}>
-                <h1>Spotify</h1>
-                { isLoggedIn ?  <Button onClick={(e) => logoutAction(e)}>Logout In Spotify</Button> : <Button onClick={(e) => requestAuth(e)}>Login On Spotify</Button>}
-            </div>
+      <>
+        <h2>Playlist Form</h2>
+        <PlaylistForm
+          handleSubmitForm={handleSubmitForm}
+          handleChangeForm={handleChangeForm}
+          formPlaylist={formPlaylist}
+        />
 
-            <div className={style.list_playlist}>
-                { isLoggedIn ? playlistView() : nullPlaylistView() }
-            </div>
-        </div>
-    )
-}
+        <PlaylistSearch
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          input={input}
+        />
 
-export default index
+        {track.map((item, idx) => (
+          <PlaylistItem
+            data={item}
+            key={item.id}
+            idx={idx}
+            handleSelect={handleSelect}
+            isSelected={checkSelected(item.uri)}
+          />
+        ))}
+      </>
+    );
+  };
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (input !== "") {
+      const reqOptions = {
+        headers: {
+          Authorization: "Bearer " + `${token.access_token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      const trackItem = await fetch(
+        `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`,
+        reqOptions
+      ).then((response) => response.json());
+      setTrack(trackItem.tracks.items);
+    } else {
+      setTrack([]);
+    }
+  };
+
+  const handleChangeForm = (e) => {
+    const { name, value } = e.target;
+    setFormPlaylist({ ...formPlaylist, [name]: value });
+  };
+
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+
+    const users_id = user.id;
+    const reqOptions = {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + `${token.access_token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formPlaylist.title,
+        description: formPlaylist.desc,
+        public: false,
+      }),
+    };
+    await fetch(
+      `https://api.spotify.com/v1/users/${users_id}/playlists`,
+      reqOptions
+    ).then((response) => response.json());
+
+    alert(`Create Playlist "${formPlaylist.title}" Successfully`);
+    setFormPlaylist({ title: "", desc: "" });
+  };
+
+  const nullPlaylistView = () => {
+    return (
+      <>
+        <h1 className={style.h1_null}>Must Login First!</h1>
+      </>
+    );
+  };
+
+  const logoutAction = (e) => {
+    e.preventDefault();
+
+    setIsLoggedIn(false);
+    setToken(null);
+
+    window.location.href = "http://localhost:3001/";
+  };
+
+  return (
+    <div className={style.playlist}>
+      <div className={style.title}>
+        <h1>Spotify</h1>
+        {isLoggedIn ? (
+          <Button onClick={(e) => logoutAction(e)}>Logout In Spotify</Button>
+        ) : (
+          <Button onClick={(e) => requestAuth(e)}>Login On Spotify</Button>
+        )}
+      </div>
+
+      <div className={style.list_playlist}>
+        {isLoggedIn ? playlistView() : nullPlaylistView()}
+      </div>
+    </div>
+  );
+};
+
+export default index;

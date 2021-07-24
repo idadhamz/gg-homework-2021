@@ -23,32 +23,10 @@
     display: flex;
     flex-direction: column;
     
-    gap: 2rem;
+    gap: 1rem;
     margin: 2rem 0;
 
     padding: 0 10rem;
-}
-
-.list_playlist input {
-    margin: 3rem 0;
-    padding: 1em 1.5em;
-
-    width: 300px;
-
-    border-radius: 20px;
-    border: 1.5px solid gainsboro;
-
-    font-size: 1.1rem;
-    font-weight: normal;
-
-    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-}
-
-.list_playlist input:focus {
-    outline: none !important;
-    border: 2px solid #4DC05A;
 }
 
 .list_playlist .h1_null {

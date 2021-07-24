@@ -1,45 +1,45 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 const selectPlaylist = () => {
-    const [selectedTrack, setSelectedTrack] = useState([])
+  const [selectedTrack, setSelectedTrack] = useState([]);
 
-    const addTrack = (id) => {
-        setSelectedTrack([...selectedTrack, id])
+  const addTrack = (id) => {
+    setSelectedTrack([...selectedTrack, id]);
+  };
+
+  const removeTrack = (id) => {
+    const temp = [...selectedTrack];
+    const idx = temp.indexOf(id);
+
+    if (idx !== -1) {
+      temp.splice(idx, 1);
+      setSelectedTrack(temp);
     }
+  };
 
-    const removeTrack = (id) => {
-        const temp = [...selectedTrack]
-        const idx = temp.indexOf(id)
+  const checkSelected = (id) => {
+    return selectedTrack.includes(id);
+  };
 
-        if(idx !== -1) {
-            temp.splice(idx, 1)
-            setSelectedTrack(temp)
-        }
+  const handleSelect = (id) => {
+    const isSelected = checkSelected(id);
+
+    console.log(isSelected);
+
+    if (!isSelected) {
+      addTrack(id);
+    } else {
+      removeTrack(id);
     }
+  };
 
-    const checkSelected = (id) => {
-        return selectedTrack.includes(id)
-    }
+  return {
+    selectedTrack,
+    addTrack,
+    removeTrack,
+    checkSelected,
+    handleSelect,
+  };
+};
 
-    const handleSelect = (id) => {
-        const isSelected = checkSelected(id)
-
-        console.log(isSelected)
-
-        if(!isSelected) {
-            addTrack(id)
-        } else {
-            removeTrack(id)
-        }
-    }
-
-    return {
-        selectedTrack,
-        addTrack,
-        removeTrack,
-        checkSelected,
-        handleSelect
-    }
-}
-
-export { selectPlaylist }
+export { selectPlaylist };

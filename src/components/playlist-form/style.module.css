@@ -1,0 +1,33 @@
+.playlist_form {
+    display: flex;
+    flex-direction: column;
+
+    width: fit-content;
+    padding: 2rem;
+
+    border: 1.5px solid gainsboro;
+    border-radius: 2rem;
+}
+
+.submit_form {
+    border: none;
+    background-color: #00A512;
+    color: white;
+
+    padding: 1em 1.5em;
+    text-decoration: none;
+    border-radius: 2rem;
+
+    width: auto;
+    height: fit-content;
+    align-self: flex-start;
+
+    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+}
+
+.submit_form:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
