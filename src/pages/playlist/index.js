@@ -33,7 +33,6 @@ const index = () => {
     if (params) {
       setToken(params);
       setIsLoggedIn(true);
-
       getUserProfile(params);
       getUserPlaylists(params);
     } else {
@@ -61,8 +60,6 @@ const index = () => {
     }).then((response) => response.json());
     setPlaylists(playlists);
   };
-
-  console.log(playlists);
 
   const playlistView = () => {
     return (
