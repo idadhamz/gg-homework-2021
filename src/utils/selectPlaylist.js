@@ -1,19 +1,13 @@
 import { useState } from "react";
 
-// Utils
-import getParams from "./getParams";
-
 const selectPlaylist = () => {
-  const params = getParams();
   const [selectedTrack, setSelectedTrack] = useState([]);
 
-  const addTrack = async (id) => {
-    setSelectedTrack([...selectedTrack, id]);
-
+  const addTrack = async (id, tokenValue) => {
     const reqOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + `${params.access_token}`,
+        Authorization: "Bearer " + `${tokenValue}`,
         "Content-Type": "application/json",
       },
     };
@@ -22,25 +16,28 @@ const selectPlaylist = () => {
       reqOptions
     ).then((response) => response.json());
 
+    setSelectedTrack([...selectedTrack, id]);
     alert(`Add Tracks Successfully`);
   };
 
-  const removeTrack = async (id) => {
+  const removeTrack = async (id, tokenValue) => {
     const temp = [...selectedTrack];
     const idx = temp.indexOf(id);
+    // const uri = temp.filter((item) => item === id);
 
     if (idx !== -1) {
-      temp.splice(idx, 1);
-      setSelectedTrack(temp);
-
-      /* const reqOptions = {
+      /*const reqOptions = {
         method: "DELETE",
         headers: {
-          Authorization: "Bearer " + `${params.access_token}`,
+          Authorization: "Bearer " + `${tokenValue}`,
           "Content-Type": "application/json",
         },
         body: {
-          uri: temp,
+          tracks: [
+            {
+              uri: uri,
+            },
+          ],
         },
       };
       await fetch(
@@ -48,23 +45,30 @@ const selectPlaylist = () => {
         reqOptions
       ).then((response) => response.json()); */
 
+      temp.splice(idx, 1);
+      setSelectedTrack(temp);
       alert(`Remove Tracks Successfully`);
     }
+  };
+
+  const handleToken = (token) => {
+    return token;
   };
 
   const checkSelected = (id) => {
     return selectedTrack.includes(id);
   };
 
-  const handleSelect = (id) => {
+  const handleSelect = (id, token) => {
     const isSelected = checkSelected(id);
+    const tokenValue = handleToken(token);
 
     console.log(isSelected);
 
     if (!isSelected) {
-      addTrack(id);
+      addTrack(id, tokenValue);
     } else {
-      removeTrack(id);
+      removeTrack(id, tokenValue);
     }
   };
 

@@ -6,10 +6,10 @@ import PlaylistText from "../playlist-text";
 import Button from "../Button";
 import Image from "../Image";
 
-const index = ({ data, idx, handleSelect, isSelected }) => {
+const index = ({ data, idx, handleSelect, isSelected, token }) => {
   const buttonLink = (e, uri) => {
     e.preventDefault();
-    handleSelect(uri);
+    handleSelect(uri, token);
   };
 
   return (

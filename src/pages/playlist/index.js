@@ -26,7 +26,7 @@ const index = () => {
     desc: "",
   });
 
-  const { checkSelected, handleSelect } = selectPlaylist();
+  const { checkSelected, handleSelect, selectedTrack } = selectPlaylist();
 
   useEffect(() => {
     const params = getParams();
@@ -35,6 +35,7 @@ const index = () => {
       setIsLoggedIn(true);
       getUserProfile(params);
       getUserPlaylists(params);
+      getTrackPlaylist(params);
     } else {
       setToken(null);
       setIsLoggedIn(false);
@@ -61,6 +62,21 @@ const index = () => {
     setPlaylists(playlists);
   };
 
+  const getTrackPlaylist = async (params) => {
+    const trackPlaylist = await fetch(
+      `https://api.spotify.com/v1/playlists/2d06A7FChFo0lGv0rUoXsg/tracks`,
+      {
+        headers: {
+          Authorization: "Bearer " + `${params.access_token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => response.json());
+    trackPlaylist.items.map((item) => {
+      selectedTrack.push(item.track.uri);
+    });
+  };
+
   const playlistView = () => {
     return (
       <>
@@ -84,6 +100,7 @@ const index = () => {
             idx={idx}
             handleSelect={handleSelect}
             isSelected={checkSelected(item.uri)}
+            token={token.access_token}
           />
         ))}
       </>
@@ -146,7 +163,7 @@ const index = () => {
   const nullPlaylistView = () => {
     return (
       <>
-        <h1 className={style.h1_null}>Must Login First!</h1>
+        <h1 className={style.h1_null}>Login to Access Data</h1>
       </>
     );
   };
