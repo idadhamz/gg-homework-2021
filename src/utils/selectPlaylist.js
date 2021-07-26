@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const selectPlaylist = () => {
   const [selectedTrack, setSelectedTrack] = useState([]);
+  const token = useSelector((state) => state.token.value);
 
-  const addTrack = async (id, tokenValue) => {
+  const addTrack = async (id) => {
     const reqOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + `${tokenValue}`,
+        Authorization: "Bearer " + `${token}`,
         "Content-Type": "application/json",
       },
     };
@@ -20,7 +22,7 @@ const selectPlaylist = () => {
     alert(`Add Tracks Successfully`);
   };
 
-  const removeTrack = async (id, tokenValue) => {
+  const removeTrack = async (id) => {
     const temp = [...selectedTrack];
     const idx = temp.indexOf(id);
     // const uri = temp.filter((item) => item === id);
@@ -29,7 +31,7 @@ const selectPlaylist = () => {
       /*const reqOptions = {
         method: "DELETE",
         headers: {
-          Authorization: "Bearer " + `${tokenValue}`,
+          Authorization: "Bearer " + `${token}`,
           "Content-Type": "application/json",
         },
         body: {
@@ -51,24 +53,18 @@ const selectPlaylist = () => {
     }
   };
 
-  const handleToken = (token) => {
-    return token;
-  };
-
   const checkSelected = (id) => {
     return selectedTrack.includes(id);
   };
 
-  const handleSelect = (id, token) => {
+  const handleSelect = (id) => {
     const isSelected = checkSelected(id);
-    const tokenValue = handleToken(token);
-
     console.log(isSelected);
 
     if (!isSelected) {
-      addTrack(id, tokenValue);
+      addTrack(id);
     } else {
-      removeTrack(id, tokenValue);
+      removeTrack(id);
     }
   };
 

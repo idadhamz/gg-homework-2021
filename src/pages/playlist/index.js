@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import PlaylistForm from "../../components/playlist-form";
@@ -12,15 +13,22 @@ import getParams from "../../utils/getParams";
 import requestAuth from "../../utils/requestAuth";
 import { selectPlaylist } from "../../utils/selectPlaylist";
 
+// Slices
+import { setToken } from "../../redux/slices/tokenSlice";
+
 const index = () => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token.value);
+
+  // const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState(null);
   const [user, setUser] = useState("");
 
   const [track, setTrack] = useState([]);
   const [input, setInput] = useState("");
 
   const [playlists, setPlaylists] = useState([]);
+  const [idPlaylist, setIdPlaylist] = useState("");
   const [formPlaylist, setFormPlaylist] = useState({
     title: "",
     desc: "",
@@ -31,43 +39,49 @@ const index = () => {
   useEffect(() => {
     const params = getParams();
     if (params) {
-      setToken(params);
+      dispatch(setToken(params.access_token));
       setIsLoggedIn(true);
-      getUserProfile(params);
-      getUserPlaylists(params);
-      getTrackPlaylist(params);
+      if (token) {
+        getUserProfile();
+        getUserPlaylists();
+        getTrackPlaylist();
+      }
     } else {
-      setToken(null);
+      dispatch(setToken(null));
       setIsLoggedIn(false);
     }
-  }, []);
+  }, [token]);
 
-  const getUserProfile = async (params) => {
+  const getUserProfile = async () => {
     const valueUser = await fetch(`https://api.spotify.com/v1/me`, {
       headers: {
-        Authorization: "Bearer " + `${params.access_token}`,
+        Authorization: "Bearer " + `${token}`,
         "Content-Type": "application/json",
       },
     }).then((response) => response.json());
     setUser(valueUser);
   };
 
-  const getUserPlaylists = async (params) => {
-    const playlists = await fetch(`https://api.spotify.com/v1/me/playlists`, {
-      headers: {
-        Authorization: "Bearer " + `${params.access_token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => response.json());
-    setPlaylists(playlists);
+  const getUserPlaylists = async () => {
+    const playlistsValue = await fetch(
+      `https://api.spotify.com/v1/me/playlists`,
+      {
+        headers: {
+          Authorization: "Bearer " + `${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => response.json());
+    setPlaylists(playlistsValue.items);
+    setIdPlaylist(playlistsValue.items.map((item) => item.id));
   };
 
-  const getTrackPlaylist = async (params) => {
+  const getTrackPlaylist = async () => {
     const trackPlaylist = await fetch(
       `https://api.spotify.com/v1/playlists/2d06A7FChFo0lGv0rUoXsg/tracks`,
       {
         headers: {
-          Authorization: "Bearer " + `${params.access_token}`,
+          Authorization: "Bearer " + `${token}`,
           "Content-Type": "application/json",
         },
       }
@@ -76,6 +90,8 @@ const index = () => {
       selectedTrack.push(item.track.uri);
     });
   };
+
+  console.log(selectedTrack);
 
   const playlistView = () => {
     return (
@@ -100,7 +116,6 @@ const index = () => {
             idx={idx}
             handleSelect={handleSelect}
             isSelected={checkSelected(item.uri)}
-            token={token.access_token}
           />
         ))}
       </>
@@ -116,7 +131,7 @@ const index = () => {
     if (input !== "") {
       const reqOptions = {
         headers: {
-          Authorization: "Bearer " + `${token.access_token}`,
+          Authorization: "Bearer " + `${token}`,
           "Content-Type": "application/json",
         },
       };
@@ -142,7 +157,7 @@ const index = () => {
     const reqOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + `${token.access_token}`,
+        Authorization: "Bearer " + `${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
