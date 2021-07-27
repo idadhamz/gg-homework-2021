@@ -6,7 +6,7 @@ import PlaylistText from "../playlist-text";
 import Button from "../Button";
 import Image from "../Image";
 
-const index = ({ data, idx, handleSelect, isSelected }) => {
+const index = ({ data, idx, handleSelect, isSelected, userPlaylists }) => {
   const buttonLink = (e, uri) => {
     e.preventDefault();
     handleSelect(uri);
@@ -25,12 +25,23 @@ const index = ({ data, idx, handleSelect, isSelected }) => {
         artists={data.album.artists[0].name}
         album={data.album.name}
       />
-      <Button
-        onClick={(e) => buttonLink(e, data.uri)}
-        style={{ backgroundColor: isSelected ? "red" : "#00A512" }}
-      >
-        {isSelected ? "Deselect" : "Select"}
-      </Button>
+      {userPlaylists.map((playlist) => {
+        return (
+          <Button
+            onClick={(e) => buttonLink(e, data.uri)}
+            style={{
+              backgroundColor: isSelected ? "red" : "#00A512",
+              fontSize: "0.8rem",
+              margin: "0 0.5rem",
+            }}
+            key={playlist.id}
+          >
+            {isSelected
+              ? `${playlist.name} Deselect`
+              : `${playlist.name} Select`}
+          </Button>
+        );
+      })}
     </div>
   );
 };

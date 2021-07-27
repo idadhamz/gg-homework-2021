@@ -19,16 +19,15 @@ import { setToken } from "../../redux/slices/tokenSlice";
 const index = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token.value);
-
-  // const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState("");
+  const [showFormPlaylist, setshowFormPlaylist] = useState(false);
 
   const [track, setTrack] = useState([]);
   const [input, setInput] = useState("");
 
   const [playlists, setPlaylists] = useState([]);
-  const [idPlaylist, setIdPlaylist] = useState("");
+  // const [idPlaylist, setIdPlaylist] = useState("");
   const [formPlaylist, setFormPlaylist] = useState({
     title: "",
     desc: "",
@@ -40,8 +39,8 @@ const index = () => {
     const params = getParams();
     if (params) {
       dispatch(setToken(params.access_token));
-      setIsLoggedIn(true);
       if (token) {
+        setIsLoggedIn(true);
         getUserProfile();
         getUserPlaylists();
         getTrackPlaylist();
@@ -73,8 +72,10 @@ const index = () => {
       }
     ).then((response) => response.json());
     setPlaylists(playlistsValue.items);
-    setIdPlaylist(playlistsValue.items.map((item) => item.id));
+    // setIdPlaylist(playlistsValue.items.map((item) => item.id));
   };
+
+  console.log(playlists);
 
   const getTrackPlaylist = async () => {
     const trackPlaylist = await fetch(
@@ -91,17 +92,17 @@ const index = () => {
     });
   };
 
-  console.log(selectedTrack);
-
   const playlistView = () => {
     return (
       <>
-        <h2>Playlist Form</h2>
-        <PlaylistForm
-          handleSubmitForm={handleSubmitForm}
-          handleChangeForm={handleChangeForm}
-          formPlaylist={formPlaylist}
-        />
+        <div style={{ display: showFormPlaylist ? "block" : "none" }}>
+          <h2>Playlist Form</h2>
+          <PlaylistForm
+            handleSubmitForm={handleSubmitForm}
+            handleChangeForm={handleChangeForm}
+            formPlaylist={formPlaylist}
+          />
+        </div>
 
         <PlaylistSearch
           handleSubmit={handleSubmit}
@@ -116,6 +117,7 @@ const index = () => {
             idx={idx}
             handleSelect={handleSelect}
             isSelected={checkSelected(item.uri)}
+            userPlaylists={playlists}
           />
         ))}
       </>
@@ -183,6 +185,11 @@ const index = () => {
     );
   };
 
+  const formPlaylistAction = (e) => {
+    e.preventDefault();
+    setshowFormPlaylist(!showFormPlaylist);
+  };
+
   const logoutAction = (e) => {
     e.preventDefault();
 
@@ -197,9 +204,27 @@ const index = () => {
       <div className={style.title}>
         <h1>Spotify</h1>
         {isLoggedIn ? (
-          <Button onClick={(e) => logoutAction(e)}>Logout In Spotify</Button>
+          <div>
+            <Button
+              onClick={(e) => formPlaylistAction(e)}
+              style={{ backgroundColor: showFormPlaylist ? "red" : "#00A512" }}
+            >
+              {showFormPlaylist ? "Cancel Create" : "Create Playlists"}
+            </Button>
+            <Button
+              onClick={(e) => logoutAction(e)}
+              style={{ margin: "0 1rem", backgroundColor: "red" }}
+            >
+              Logout In Spotify
+            </Button>
+          </div>
         ) : (
-          <Button onClick={(e) => requestAuth(e)}>Login On Spotify</Button>
+          <Button
+            onClick={(e) => requestAuth(e)}
+            style={{ backgroundColor: "#00A512" }}
+          >
+            Login On Spotify
+          </Button>
         )}
       </div>
 
