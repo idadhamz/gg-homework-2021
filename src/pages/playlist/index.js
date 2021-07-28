@@ -16,6 +16,14 @@ import { selectPlaylist } from "../../utils/selectPlaylist";
 // Slices
 import { setToken } from "../../redux/slices/tokenSlice";
 
+// Services
+import {
+  getUserProfile,
+  getUserPlaylists,
+  getTrackPlaylist,
+  getSearchTrack,
+} from "../../services/apiSpotify";
+
 const index = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token.value);
@@ -27,7 +35,6 @@ const index = () => {
   const [input, setInput] = useState("");
 
   const [playlists, setPlaylists] = useState([]);
-  // const [idPlaylist, setIdPlaylist] = useState("");
   const [formPlaylist, setFormPlaylist] = useState({
     title: "",
     desc: "",
@@ -41,56 +48,17 @@ const index = () => {
       dispatch(setToken(params.access_token));
       if (token) {
         setIsLoggedIn(true);
-        getUserProfile();
-        getUserPlaylists();
-        getTrackPlaylist();
+        getUserProfile(token).then((data) => setUser(data));
+        getUserPlaylists(token).then((data) => setPlaylists(data.items));
+        getTrackPlaylist(token).then((data) =>
+          data.items.map((item) => selectedTrack.push(item.track.uri))
+        );
       }
     } else {
       dispatch(setToken(null));
       setIsLoggedIn(false);
     }
   }, [token]);
-
-  const getUserProfile = async () => {
-    const valueUser = await fetch(`https://api.spotify.com/v1/me`, {
-      headers: {
-        Authorization: "Bearer " + `${token}`,
-        "Content-Type": "application/json",
-      },
-    }).then((response) => response.json());
-    setUser(valueUser);
-  };
-
-  const getUserPlaylists = async () => {
-    const playlistsValue = await fetch(
-      `https://api.spotify.com/v1/me/playlists`,
-      {
-        headers: {
-          Authorization: "Bearer " + `${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((response) => response.json());
-    setPlaylists(playlistsValue.items);
-    // setIdPlaylist(playlistsValue.items.map((item) => item.id));
-  };
-
-  console.log(playlists);
-
-  const getTrackPlaylist = async () => {
-    const trackPlaylist = await fetch(
-      `https://api.spotify.com/v1/playlists/2d06A7FChFo0lGv0rUoXsg/tracks`,
-      {
-        headers: {
-          Authorization: "Bearer " + `${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    ).then((response) => response.json());
-    trackPlaylist.items.map((item) => {
-      selectedTrack.push(item.track.uri);
-    });
-  };
 
   const playlistView = () => {
     return (
@@ -131,17 +99,7 @@ const index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (input !== "") {
-      const reqOptions = {
-        headers: {
-          Authorization: "Bearer " + `${token}`,
-          "Content-Type": "application/json",
-        },
-      };
-      const trackItem = await fetch(
-        `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`,
-        reqOptions
-      ).then((response) => response.json());
-      setTrack(trackItem.tracks.items);
+      getSearchTrack(token, input).then((data) => setTrack(data.tracks.items));
     } else {
       setTrack([]);
     }
@@ -171,7 +129,7 @@ const index = () => {
     await fetch(
       `https://api.spotify.com/v1/users/${users_id}/playlists`,
       reqOptions
-    ).then((response) => response.json());
+    ).then((res) => res.json());
 
     alert(`Create Playlist "${formPlaylist.title}" Successfully`);
     setFormPlaylist({ title: "", desc: "" });
@@ -194,7 +152,7 @@ const index = () => {
     e.preventDefault();
 
     setIsLoggedIn(false);
-    setToken(null);
+    dispatch(setToken(null));
 
     window.location.href = "http://localhost:3001/";
   };
