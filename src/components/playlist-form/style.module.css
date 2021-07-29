@@ -9,6 +9,13 @@
     border-radius: 2rem;
 }
 
+.button_form {
+    display: flex;
+    gap: 0.5rem;
+
+    padding: 0.5rem 0;
+}
+
 .submit_form {
     border: none;
     background-color: #00A512;
@@ -28,6 +35,29 @@
 }
 
 .submit_form:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.cancel_form {
+    border: none;
+    background-color: red;
+    color: white;
+
+    padding: 1em 1.5em;
+    text-decoration: none;
+    border-radius: 2rem;
+
+    width: auto;
+    height: fit-content;
+    align-self: flex-start;
+
+    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
+}
+
+.cancel_form:hover {
     opacity: 0.7;
     cursor: pointer;
 }

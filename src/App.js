@@ -1,15 +1,19 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useSelector } from "react-redux";
 
-// Pages
-import Playlist from './pages/playlist';
+// Components
+import Navbar from "./components/Navbar";
 
 const App = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  console.log(isLoggedIn);
+
   return (
     <div className="App">
-      <Playlist />
+      <Navbar isLoggedIn={isLoggedIn} />
     </div>
   );
-}
+};
 
 export default App;

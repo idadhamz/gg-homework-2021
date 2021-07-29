@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const selectPlaylist = () => {
   const [selectedTrack, setSelectedTrack] = useState([]);
-  const token = useSelector((state) => state.token.value);
+  const token = useSelector((state) => state.auth.token);
 
   const addTrack = async (id) => {
     const reqOptions = {

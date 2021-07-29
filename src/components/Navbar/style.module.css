@@ -1,0 +1,21 @@
+.title {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 10rem;
+    border-bottom: 1px solid #d9dadc;
+}
+
+.title a {
+    text-decoration: none;
+}
+
+.title h1 {
+    color: black;
+    margin: 3rem 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
+import { Link } from "react-router-dom";
 
 // Components
 import Input from "../../components/Input";
@@ -34,9 +35,14 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }) => {
       >
         Description
       </Input>
-      <Button type="submit" className={style.submit_form}>
-        Submit
-      </Button>
+      <div className={style.button_form}>
+        <Button type="submit" className={style.submit_form}>
+          Submit
+        </Button>
+        <Link to="/" className={style.cancel_form}>
+          Cancel
+        </Link>
+      </div>
     </form>
   );
 };
