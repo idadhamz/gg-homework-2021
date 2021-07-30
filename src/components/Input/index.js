@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./style.module.css";
 
-const index = ({ children, ...props }) => {
+const index = ({ ...props }) => {
   return (
     <>
       {/* <label htmlFor={props.name} className={style.label}>

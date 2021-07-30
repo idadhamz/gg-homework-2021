@@ -1,15 +1,16 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
+import { setSelectedTrack } from "../redux/slices/trackSlice";
 import { addNewTrack } from "../services/apiSpotify";
 
 const selectPlaylist = () => {
-  const [selectedTrack, setSelectedTrack] = useState([]);
+  const dispatch = useDispatch();
+  const selectedTrack = useSelector((state) => state.track.selectedTrack);
   const token = useSelector((state) => state.auth.token);
 
   const addTrack = async (id, playlist_id) => {
     await addNewTrack(token, id, playlist_id).then(() =>
-      setSelectedTrack([...selectedTrack, id])
+      dispatch(setSelectedTrack(id))
     );
     alert(`Add Tracks Successfully`);
   };
@@ -40,7 +41,7 @@ const selectPlaylist = () => {
       ).then((response) => response.json()); */
 
       temp.splice(idx, 1);
-      setSelectedTrack(temp);
+      dispatch(setSelectedTrack(temp));
       alert(`Remove Tracks Successfully`);
     }
   };

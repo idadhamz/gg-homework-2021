@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from "./style.module.css";
 
 // Components
@@ -6,7 +6,7 @@ import PlaylistText from "../playlist-text";
 import Button from "../Button";
 import Image from "../Image";
 
-const index = ({ data, idx, handleSelect, isSelected, userPlaylists }) => {
+const index = ({ data, idx, handleSelect, isSelected, playlistId }) => {
   const buttonLink = (e, uri, playlist_id) => {
     e.preventDefault();
     handleSelect(uri, playlist_id);
@@ -25,23 +25,14 @@ const index = ({ data, idx, handleSelect, isSelected, userPlaylists }) => {
         artists={data.album.artists[0].name}
         album={data.album.name}
       />
-      {userPlaylists.map((playlist) => {
-        return (
-          <Button
-            onClick={(e) => buttonLink(e, data.uri, playlist.id)}
-            style={{
-              backgroundColor: isSelected ? "red" : "#00A512",
-              fontSize: "0.8rem",
-              margin: "0 0.5rem",
-            }}
-            key={playlist.id}
-          >
-            {isSelected
-              ? `${playlist.name} Deselect`
-              : `${playlist.name} Select`}
-          </Button>
-        );
-      })}
+      <Button
+        onClick={(e) => buttonLink(e, data.uri, playlistId)}
+        style={{
+          backgroundColor: isSelected ? "red" : "#00A512",
+        }}
+      >
+        {isSelected ? `Deselect` : `Select`}
+      </Button>
     </div>
   );
 };

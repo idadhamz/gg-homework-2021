@@ -12,6 +12,7 @@ import { selectPlaylist } from "../../utils/selectPlaylist";
 
 // Slices
 import { setAuth, setUser } from "../../redux/slices/authSlice";
+import { setSelectedTrack } from "../../redux/slices/trackSlice";
 
 // Services
 import {
@@ -25,12 +26,13 @@ const index = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const selectedTrack = useSelector((state) => state.track.selectedTrack);
 
   const [track, setTrack] = useState([]);
   const [input, setInput] = useState("");
 
   const [playlists, setPlaylists] = useState([]);
-  const { checkSelected, handleSelect, selectedTrack } = selectPlaylist();
+  const { checkSelected, handleSelect } = selectPlaylist();
 
   useEffect(() => {
     const params = token === null ? getParams() : token;
@@ -44,8 +46,8 @@ const index = () => {
       if (token) {
         getUserProfile(token).then((data) => dispatch(setUser(data)));
         getUserPlaylists(token).then((data) => setPlaylists(data.items));
-        getTrackPlaylist(token, "2jRpicQQknHFNFyxotyxvl").then((data) =>
-          data.items.map((item) => selectedTrack.push(item.track.uri))
+        getTrackPlaylist(token, "71vfD2vkEQVJwvjkya5w0D").then((data) =>
+          data.items.map((item) => dispatch(setSelectedTrack(item.track.uri)))
         );
         getSearchTrack(token, "JKT 48").then((data) =>
           setTrack(data.tracks.items)
@@ -61,21 +63,32 @@ const index = () => {
   const playlistView = () => {
     return (
       <>
-        <PlaylistSearch
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          input={input}
-        />
+        {/* {playlists.map((item) => {
+          console.log(item);
+        })} */}
 
-        {track.map((item, idx) => (
-          <PlaylistItem
-            data={item}
-            key={item.id}
-            idx={idx}
-            handleSelect={handleSelect}
-            isSelected={checkSelected(item.uri)}
-            userPlaylists={playlists}
-          />
+        {playlists.map((playlist) => (
+          <div key={playlist.id}>
+            <h1>{playlist.name}</h1>
+            <p>{playlist.description}</p>
+
+            <PlaylistSearch
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              input={input}
+            />
+
+            {track.map((item, idx) => (
+              <PlaylistItem
+                data={item}
+                key={item.id}
+                idx={idx}
+                handleSelect={handleSelect}
+                isSelected={checkSelected(item.uri)}
+                playlistId={playlist.id}
+              />
+            ))}
+          </div>
         ))}
       </>
     );

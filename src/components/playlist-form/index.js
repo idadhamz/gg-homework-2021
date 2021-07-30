@@ -19,9 +19,7 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }) => {
         autoComplete="off"
         minLength="10"
         required
-      >
-        Title
-      </Input>
+      />
       <Input
         id="desc"
         type="text"
@@ -32,9 +30,7 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }) => {
         autoComplete="off"
         minLength="20"
         required
-      >
-        Description
-      </Input>
+      />
       <div className={style.button_form}>
         <Button type="submit" className={style.submit_form}>
           Submit

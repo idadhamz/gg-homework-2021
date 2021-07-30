@@ -36,7 +36,7 @@ const getSearchTrack = async (token, input) => {
     },
   };
   return await fetch(
-    `https://api.spotify.com/v1/search?q=${input}&type=track&limit=10`,
+    `https://api.spotify.com/v1/search?q=${input}&type=track&limit=5`,
     reqOptions
   ).then((res) => res.json());
 };

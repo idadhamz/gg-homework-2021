@@ -8,7 +8,7 @@ const requestAuth = (e) => {
 
   const CLIENT_ID = process.env.REACT_APP_SPOTIFY_ID;
 
-  let URL = `${AUTHORIZE}?client_id=${encodeURIComponent(
+  const URL = `${AUTHORIZE}?client_id=${encodeURIComponent(
     CLIENT_ID
   )}&response_type=token&redirect_uri=${encodeURIComponent(
     REDIRECT_URL
