@@ -1,24 +1,16 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
+import { addNewTrack } from "../services/apiSpotify";
+
 const selectPlaylist = () => {
   const [selectedTrack, setSelectedTrack] = useState([]);
   const token = useSelector((state) => state.auth.token);
 
-  const addTrack = async (id) => {
-    const reqOptions = {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + `${token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    await fetch(
-      `https://api.spotify.com/v1/playlists/2d06A7FChFo0lGv0rUoXsg/tracks?uris=${id}`,
-      reqOptions
-    ).then((response) => response.json());
-
-    setSelectedTrack([...selectedTrack, id]);
+  const addTrack = async (id, playlist_id) => {
+    await addNewTrack(token, id, playlist_id).then(() =>
+      setSelectedTrack([...selectedTrack, id])
+    );
     alert(`Add Tracks Successfully`);
   };
 
@@ -57,14 +49,13 @@ const selectPlaylist = () => {
     return selectedTrack.includes(id);
   };
 
-  const handleSelect = (id) => {
+  const handleSelect = (id, playlist_id) => {
     const isSelected = checkSelected(id);
-    console.log(isSelected);
 
     if (!isSelected) {
-      addTrack(id);
+      addTrack(id, playlist_id);
     } else {
-      removeTrack(id);
+      removeTrack(id, playlist_id);
     }
   };
 

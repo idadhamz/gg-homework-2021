@@ -7,9 +7,9 @@ import Button from "../Button";
 import Image from "../Image";
 
 const index = ({ data, idx, handleSelect, isSelected, userPlaylists }) => {
-  const buttonLink = (e, uri) => {
+  const buttonLink = (e, uri, playlist_id) => {
     e.preventDefault();
-    handleSelect(uri);
+    handleSelect(uri, playlist_id);
   };
 
   return (
@@ -28,7 +28,7 @@ const index = ({ data, idx, handleSelect, isSelected, userPlaylists }) => {
       {userPlaylists.map((playlist) => {
         return (
           <Button
-            onClick={(e) => buttonLink(e, data.uri)}
+            onClick={(e) => buttonLink(e, data.uri, playlist.id)}
             style={{
               backgroundColor: isSelected ? "red" : "#00A512",
               fontSize: "0.8rem",

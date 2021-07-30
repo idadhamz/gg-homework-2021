@@ -44,7 +44,7 @@ const index = () => {
       if (token) {
         getUserProfile(token).then((data) => dispatch(setUser(data)));
         getUserPlaylists(token).then((data) => setPlaylists(data.items));
-        getTrackPlaylist(token).then((data) =>
+        getTrackPlaylist(token, "2jRpicQQknHFNFyxotyxvl").then((data) =>
           data.items.map((item) => selectedTrack.push(item.track.uri))
         );
         getSearchTrack(token, "JKT 48").then((data) =>
@@ -55,6 +55,8 @@ const index = () => {
       dispatch(setAuth({ token: null, isLoggedIn: false }));
     }
   }, [token]);
+
+  console.log(selectedTrack);
 
   const playlistView = () => {
     return (

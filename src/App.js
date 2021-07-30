@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log(isLoggedIn);
 
   return (
     <div className="App">

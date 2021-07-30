@@ -19,8 +19,8 @@ const getUserPlaylists = async (token) => {
   }).then((res) => res.json());
 };
 
-const getTrackPlaylist = async (token) => {
-  return await fetch(`${API_SPOTIFY_PLAYLISTS}/2d06A7FChFo0lGv0rUoXsg/tracks`, {
+const getTrackPlaylist = async (token, playlist_id) => {
+  return await fetch(`${API_SPOTIFY_PLAYLISTS}/${playlist_id}/tracks`, {
     headers: {
       Authorization: "Bearer " + `${token}`,
       "Content-Type": "application/json",
@@ -41,4 +41,24 @@ const getSearchTrack = async (token, input) => {
   ).then((res) => res.json());
 };
 
-export { getUserProfile, getUserPlaylists, getTrackPlaylist, getSearchTrack };
+const addNewTrack = async (token, id, playlist_id) => {
+  const reqOptions = {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + `${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+  return await fetch(
+    `https://api.spotify.com/v1/playlists/${playlist_id}/tracks?uris=${id}`,
+    reqOptions
+  ).then((res) => res.json());
+};
+
+export {
+  getUserProfile,
+  getUserPlaylists,
+  getTrackPlaylist,
+  getSearchTrack,
+  addNewTrack,
+};
