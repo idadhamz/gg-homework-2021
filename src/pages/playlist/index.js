@@ -46,9 +46,6 @@ const index = () => {
       if (token) {
         getUserProfile(token).then((data) => dispatch(setUser(data)));
         getUserPlaylists(token).then((data) => setPlaylists(data.items));
-        getTrackPlaylist(token, "71vfD2vkEQVJwvjkya5w0D").then((data) =>
-          data.items.map((item) => dispatch(setSelectedTrack(item.track.uri)))
-        );
         getSearchTrack(token, "JKT 48").then((data) =>
           setTrack(data.tracks.items)
         );
@@ -57,6 +54,16 @@ const index = () => {
       dispatch(setAuth({ token: null, isLoggedIn: false }));
     }
   }, [token]);
+
+  useEffect(() => {
+    if (playlists) {
+      playlists.map((playlist) => {
+        getTrackPlaylist(token, playlist.id).then((data) =>
+          data.items.map((item) => dispatch(setSelectedTrack(item.track.uri)))
+        );
+      });
+    }
+  }, [playlists]);
 
   console.log(selectedTrack);
 

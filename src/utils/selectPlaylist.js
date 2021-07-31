@@ -5,7 +5,9 @@ import { addNewTrack } from "../services/apiSpotify";
 
 const selectPlaylist = () => {
   const dispatch = useDispatch();
-  const selectedTrack = useSelector((state) => state.track.selectedTrack);
+  const selectedTrack = useSelector(
+    (state) => state.track.selectedTrack.playlists.tracks
+  );
   const token = useSelector((state) => state.auth.token);
 
   const addTrack = async (id, playlist_id) => {
