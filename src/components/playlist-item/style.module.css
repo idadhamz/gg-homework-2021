@@ -1,12 +1,7 @@
-.playlist_item {
+.playlist {
     display: flex;
     flex-direction: row;
-
     align-items: center;
-
-    width: auto;
-    height: auto;
-    padding: 0 2rem;
 
     border: 1px solid #d9dadc;
     border-radius: 10px;
@@ -15,22 +10,17 @@
     -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
 }
 
-.playlist_item:hover {
-    background-color: whitesmoke;
+.playlist:hover {
+    background-color: #eee;
     transition: all .15s ease;
 }
 
-.playlist_item .h1 {
-    font-weight: bold;
-    font-size: 1.3rem;
-    text-align: center;
+.playlist img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px 0 0 10px;
+}
 
-    background-color: #00A512;
-    color: #d9dadc;
-
-    margin-right: 2rem;
-    padding: 1rem;
-    border-radius: 2rem;
-    width: 20px;
-    height: 20px;
+.content_playlist {
+    padding: 2rem;
 }

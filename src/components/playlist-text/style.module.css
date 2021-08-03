@@ -1,11 +1,9 @@
 .text_item {
-    padding: 1rem 2rem;
-
     display: flex;
     flex-direction: column;
+    width: auto;
 
-    gap: 0 2rem;
-    width: 500px;
+    margin-bottom: 10px;
 }
 
 .title_item {
@@ -20,6 +18,5 @@
     opacity: 0.7;
 
     padding: 0.5rem 0;
-
     margin: 0;
 }

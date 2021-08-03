@@ -2,6 +2,6 @@
     padding: 2.5rem 10rem;
 }
 
-.playlist h2 {
-    padding-bottom: 10px;
+.playlist h1 {
+    font-weight: 900;
 }

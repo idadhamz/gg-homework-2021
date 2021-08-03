@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+// Pages
+import PlaylistTrack from "../playlist-track";
 
 // Components
-import PlaylistSearch from "../../components/playlist-search";
-import PlaylistItem from "../../components/playlist-item";
+import Image from "../../components/Image";
 
 // Utils
 import getParams from "../../utils/getParams";
-import { selectPlaylist } from "../../utils/selectPlaylist";
 
 // Slices
 import { setAuth, setUser } from "../../redux/slices/authSlice";
@@ -19,20 +21,14 @@ import {
   getUserProfile,
   getUserPlaylists,
   getTrackPlaylist,
-  getSearchTrack,
 } from "../../services/apiSpotify";
 
 const index = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const selectedTrack = useSelector((state) => state.track.selectedTrack);
-
-  const [track, setTrack] = useState([]);
-  const [input, setInput] = useState("");
 
   const [playlists, setPlaylists] = useState([]);
-  const { checkSelected, handleSelect } = selectPlaylist();
 
   useEffect(() => {
     const params = token === null ? getParams() : token;
@@ -46,9 +42,6 @@ const index = () => {
       if (token) {
         getUserProfile(token).then((data) => dispatch(setUser(data)));
         getUserPlaylists(token).then((data) => setPlaylists(data.items));
-        getSearchTrack(token, "JKT 48").then((data) =>
-          setTrack(data.tracks.items)
-        );
       }
     } else {
       dispatch(setAuth({ token: null, isLoggedIn: false }));
@@ -65,53 +58,40 @@ const index = () => {
     }
   }, [playlists]);
 
-  console.log(selectedTrack);
-
   const playlistView = () => {
     return (
       <>
-        {/* {playlists.map((item) => {
-          console.log(item);
-        })} */}
-
-        {playlists.map((playlist) => (
-          <div key={playlist.id}>
-            <h1>{playlist.name}</h1>
-            <p>{playlist.description}</p>
-
-            <PlaylistSearch
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
-              input={input}
-            />
-
-            {track.map((item, idx) => (
-              <PlaylistItem
-                data={item}
-                key={item.id}
-                idx={idx}
-                handleSelect={handleSelect}
-                isSelected={checkSelected(item.uri)}
-                playlistId={playlist.id}
-              />
+        <Router>
+          {console.log(playlists)}
+          <h1>Daftar Playlist</h1>
+          <div className={style.playlists}>
+            {playlists.map((playlist) => (
+              <Link
+                to={`/playlist/${playlist.id}`}
+                key={playlist.id}
+                className={style.item_playlist}
+              >
+                <Image
+                  src={playlist.images[0]?.url}
+                  width={playlist.images[0]?.width}
+                  height={playlist.images[0]?.height}
+                />
+                <div className={style.text_playlist}>
+                  <h1>{playlist.name}</h1>
+                  <p>{playlist.description}</p>
+                </div>
+              </Link>
             ))}
           </div>
-        ))}
+
+          <Switch>
+            <Route path="/playlist/:id">
+              <PlaylistTrack />
+            </Route>
+          </Switch>
+        </Router>
       </>
     );
-  };
-
-  const handleChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (input !== "") {
-      getSearchTrack(token, input).then((data) => setTrack(data.tracks.items));
-    } else {
-      setTrack([]);
-    }
   };
 
   const nullPlaylistView = () => {

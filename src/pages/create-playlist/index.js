@@ -48,7 +48,7 @@ const index = () => {
 
   return (
     <div className={style.playlist}>
-      <h2>Playlist Form</h2>
+      <h1>Playlist Form</h1>
       <PlaylistForm
         handleSubmitForm={handleSubmitForm}
         handleChangeForm={handleChangeForm}
