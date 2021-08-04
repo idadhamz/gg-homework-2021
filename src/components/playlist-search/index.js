@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./style.module.css";
 
 // Components
 import Input from "../../components/Input";
@@ -6,7 +7,7 @@ import Button from "../../components/Button";
 
 const index = ({ handleSubmit, handleChange, input }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={style.form}>
       <Input
         type="text"
         name="search"
@@ -16,9 +17,7 @@ const index = ({ handleSubmit, handleChange, input }) => {
         value={input}
         autoComplete="off"
       />
-      <Button type="submit" style={{ margin: "0 1rem" }}>
-        Search
-      </Button>
+      <Button type="submit">Search</Button>
     </form>
   );
 };

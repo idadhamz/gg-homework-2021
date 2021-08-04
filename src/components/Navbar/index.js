@@ -39,7 +39,7 @@ const index = ({ isLoggedIn }) => {
           <h1>Spotify</h1>
         </Link>
         {isLoggedIn ? (
-          <div>
+          <div className={style.div_button}>
             <Link to="/create-playlist">
               <Button style={{ backgroundColor: "#00A512" }}>
                 Create Playlists
@@ -47,9 +47,9 @@ const index = ({ isLoggedIn }) => {
             </Link>
             <Button
               onClick={(e) => logoutAction(e)}
-              style={{ margin: "0 1rem", backgroundColor: "red" }}
+              style={{ backgroundColor: "red" }}
             >
-              Logout In Spotify
+              Logout Spotify
             </Button>
           </div>
         ) : (

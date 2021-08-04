@@ -40,13 +40,15 @@ const index = () => {
 
   return (
     <>
-      <h1>Daftar Track</h1>
+      <div className={style.div_search}>
+        <h1>Daftar Track</h1>
 
-      <PlaylistSearch
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        input={input}
-      />
+        <PlaylistSearch
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          input={input}
+        />
+      </div>
 
       <div className={style.track_playlist}>
         {track.map((item, idx) => (

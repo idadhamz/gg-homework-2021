@@ -1,3 +1,4 @@
+/* mobile first */
 .playlist {
     display: flex;
     flex-direction: row;
@@ -16,11 +17,31 @@
 }
 
 .playlist img {
-    width: 150px;
-    height: auto;
+    width: 100px;
+    height: 100%;
     border-radius: 10px 0 0 10px;
 }
 
 .content_playlist {
-    padding: 2rem;
+    padding: 0.8rem 1.2rem;
+}
+
+.content_playlist button {
+    font-size: 0.8rem;
+    padding: 1rem;
+}
+
+/* desktop then */
+@media (min-width: 990px) {
+    .playlist img {
+        width: 150px;
+    }
+
+    .content_playlist {
+        padding: 2rem;
+    }
+
+    .content_playlist button {
+        font-size: 1rem;
+    }
 }

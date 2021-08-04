@@ -1,5 +1,21 @@
+/* mobile first */
 .track_playlist {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 2rem;
+}
+
+/* desktop then */
+@media (min-width: 990px) {
+    .div_search {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        align-items: center;
+    }
+    .track_playlist {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 }

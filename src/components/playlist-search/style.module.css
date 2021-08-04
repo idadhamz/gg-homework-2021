@@ -1,0 +1,30 @@
+/* mobile first */
+.form {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1rem 0;
+}
+
+.form button {
+    width: 100%;
+    height: auto;
+}
+
+/* desktop then */
+@media (min-width: 990px) {
+    .form {
+        display: flex;
+        flex-direction: row;
+        
+        gap: 1rem;
+    }
+
+    .form input {
+        width: 250px;
+    }
+
+    .form button {
+        width: auto;
+    }
+}

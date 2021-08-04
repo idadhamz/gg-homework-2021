@@ -1,7 +1,17 @@
+/* mobile first */
 .playlist {
-    padding: 2.5rem 10rem;
+    padding: 1.5rem;
 }
 
 .playlist h1 {
     font-weight: 900;
+}
+
+/* desktop then */
+@media (min-width: 990px) {
+    .playlist {
+        padding: 0 8rem;
+
+        margin: 3rem 0;
+    }
 }

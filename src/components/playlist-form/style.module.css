@@ -1,12 +1,7 @@
+/* mobile first */
 .playlist_form {
     display: flex;
     flex-direction: column;
-
-    width: fit-content;
-    padding: 2rem;
-
-    border: 1.5px solid gainsboro;
-    border-radius: 2rem;
 }
 
 .button_form {
@@ -60,4 +55,11 @@
 .cancel_form:hover {
     opacity: 0.7;
     cursor: pointer;
+}
+
+/* desktop then */
+@media (min-width: 990px) {
+    .playlist_form {
+        width: 300px;
+    }
 }
