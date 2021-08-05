@@ -1,3 +1,11 @@
 .App {
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mitr', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App .Main {
+  flex: 1;
 }

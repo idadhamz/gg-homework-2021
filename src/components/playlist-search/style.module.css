@@ -1,4 +1,4 @@
-/* mobile first */
+/* mobile */
 .form {
     display: flex;
     flex-direction: column;
@@ -11,8 +11,8 @@
     height: auto;
 }
 
-/* desktop then */
-@media (min-width: 990px) {
+/* desktop */
+@media screen and (min-width: 900px){
     .form {
         display: flex;
         flex-direction: row;

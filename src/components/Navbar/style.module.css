@@ -1,5 +1,5 @@
-/* mobile first */
-.title {
+/* mobile */
+.div_navbar {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -7,36 +7,37 @@
     padding: 1.5rem;
 }
 
-.title a {
+.div_navbar a {
     text-decoration: none;
 }
 
-.title h1 {
+.div_navbar a h1 {
     color: black;
     font-size: 1.8rem;
-    font-weight: 900;
+    font-weight: 500;
 
     margin: 0;
 }
 
-.title .div_button {
+.div_navbar .div_button {
     display: flex;
     gap: 0.7rem;
 
     margin: 1.5rem 0;
 }
 
-/* desktop then */
-@media (min-width: 990px){
-    .title {
+/* desktop */
+@media screen and (min-width: 900px){
+    .div_navbar {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
 
         padding: 0 8rem;
+        height: 80px;
     }
 
-    .title h1 {
+    .div_navbar h1 {
         margin: 3rem 0;
     }
 }

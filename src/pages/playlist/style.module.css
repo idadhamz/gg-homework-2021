@@ -2,7 +2,7 @@
     margin: 0 auto;
 }
 
-/* mobile first */
+/* mobile */
 .list_playlist {
     display: flex;
     flex-direction: column;
@@ -11,24 +11,9 @@
     padding: 0 2rem;
 }
 
-.list_playlist .h1_null {
-    font-size: 1.3rem;
-    padding: 2rem;
-    margin: 2rem auto;
-
-    border-radius: 50px;
-    border: 1px solid #d9dadc;
-    color: #333;
-
-    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-
-    width: fit-content;
-}
-
-.list_playlist h1 {
+.list_playlist .text_h1 {
     font-weight: 900;
+    font-size: 2rem;
 }
 
 .list_playlist .playlists {
@@ -73,15 +58,13 @@
     font-size: 1.5rem;
 }
 
-/* desktop then */
-@media (min-width: 990px){
-
+/* desktop */
+@media screen and (min-width: 900px){
     .list_playlist {
         padding: 0 8rem;
     }
 
     .list_playlist .playlists {
-        display: grid;
         grid-template-columns: repeat(3, 1fr);
     }
 }

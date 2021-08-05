@@ -1,4 +1,4 @@
-/* mobile first */
+/* mobile */
 .text_item {
     display: flex;
     flex-direction: column;
@@ -22,8 +22,8 @@
     margin: 0;
 }
 
-/* desktop then */
-@media (min-width: 990px) {
+/* desktop */
+@media screen and (min-width: 900px){
     .title_item {
         font-size: 1.3rem;
     }

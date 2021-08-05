@@ -9,11 +9,8 @@ import PlaylistTrack from "../playlist-track";
 // Components
 import Image from "../../components/Image";
 
-// Utils
-import getParams from "../../utils/getParams";
-
 // Slices
-import { setAuth, setUser } from "../../redux/slices/authSlice";
+import { setUser } from "../../redux/slices/authSlice";
 import { setSelectedTrack } from "../../redux/slices/trackSlice";
 
 // Services
@@ -26,25 +23,13 @@ import {
 const index = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const [playlists, setPlaylists] = useState([]);
 
   useEffect(() => {
-    const params = token === null ? getParams() : token;
-    if (params) {
-      dispatch(
-        setAuth({
-          token: token === null ? params.access_token : token,
-          isLoggedIn: true,
-        })
-      );
-      if (token) {
-        getUserProfile(token).then((data) => dispatch(setUser(data)));
-        getUserPlaylists(token).then((data) => setPlaylists(data.items));
-      }
-    } else {
-      dispatch(setAuth({ token: null, isLoggedIn: false }));
+    if (token) {
+      getUserProfile(token).then((data) => dispatch(setUser(data)));
+      getUserPlaylists(token).then((data) => setPlaylists(data.items));
     }
   }, [token]);
 
@@ -63,7 +48,7 @@ const index = () => {
       <>
         <Router>
           {console.log(playlists)}
-          <h1>Daftar Playlist</h1>
+          <h1 className={style.text_h1}>Daftar Playlist</h1>
           <div className={style.playlists}>
             {playlists.map((playlist) => (
               <Link
@@ -94,19 +79,9 @@ const index = () => {
     );
   };
 
-  const nullPlaylistView = () => {
-    return (
-      <>
-        <h1 className={style.h1_null}>Login to Access Data</h1>
-      </>
-    );
-  };
-
   return (
     <div className={style.playlist}>
-      <div className={style.list_playlist}>
-        {isLoggedIn ? playlistView() : nullPlaylistView()}
-      </div>
+      <div className={style.list_playlist}>{playlistView()}</div>
     </div>
   );
 };

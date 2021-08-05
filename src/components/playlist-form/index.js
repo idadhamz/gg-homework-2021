@@ -35,7 +35,7 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }) => {
         <Button type="submit" className={style.submit_form}>
           Submit
         </Button>
-        <Link to="/" className={style.cancel_form}>
+        <Link to="/playlist" className={style.cancel_form}>
           Cancel
         </Link>
       </div>

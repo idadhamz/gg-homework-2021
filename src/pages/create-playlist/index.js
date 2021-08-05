@@ -43,7 +43,7 @@ const index = () => {
 
     alert(`Create Playlist "${formPlaylist.title}" Successfully`);
     setFormPlaylist({ title: "", desc: "" });
-    history.push("/");
+    history.push("/playlist");
   };
 
   return (

@@ -41,7 +41,7 @@ const index = () => {
   return (
     <>
       <div className={style.div_search}>
-        <h1>Daftar Track</h1>
+        <h1 className={style.text_h1}>Daftar Track</h1>
 
         <PlaylistSearch
           handleSubmit={handleSubmit}

@@ -1,17 +1,7 @@
 import React from "react";
 import style from "./style.module.css";
-import { useDispatch } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
-
-// Pages
-import Playlist from "../../pages/playlist";
-import CreatePlaylist from "../../pages/create-playlist";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 
 // Components
 import Button from "../../components/Button";
@@ -22,55 +12,46 @@ import requestAuth from "../../utils/requestAuth";
 // Slices
 import { setAuth } from "../../redux/slices/authSlice";
 
-const index = ({ isLoggedIn }) => {
+const index = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const logoutAction = (e) => {
     e.preventDefault();
 
     dispatch(setAuth({ token: null, isLoggedIn: false }));
-    window.location.href = "http://localhost:3001/";
+    history.push("/");
   };
 
   return (
-    <Router>
-      <div className={style.title}>
-        <Link to="/">
-          <h1>Spotify</h1>
-        </Link>
-        {isLoggedIn ? (
-          <div className={style.div_button}>
-            <Link to="/create-playlist">
-              <Button style={{ backgroundColor: "#00A512" }}>
-                Create Playlists
-              </Button>
-            </Link>
-            <Button
-              onClick={(e) => logoutAction(e)}
-              style={{ backgroundColor: "red" }}
-            >
-              Logout Spotify
+    <div className={style.div_navbar}>
+      <Link to="/playlist">
+        <h1>Spotify</h1>
+      </Link>
+      {isLoggedIn ? (
+        <div className={style.div_button}>
+          <Link to="/create-playlist">
+            <Button style={{ backgroundColor: "#00A512" }}>
+              Create Playlists
             </Button>
-          </div>
-        ) : (
+          </Link>
           <Button
-            onClick={(e) => requestAuth(e)}
-            style={{ backgroundColor: "#00A512" }}
+            onClick={(e) => logoutAction(e)}
+            style={{ backgroundColor: "red" }}
           >
-            Login On Spotify
+            Logout Spotify
           </Button>
-        )}
-      </div>
-
-      <Switch>
-        <Route path="/create-playlist">
-          {isLoggedIn ? <CreatePlaylist /> : <Redirect to="/" />}
-        </Route>
-        <Route path="/">
-          <Playlist />
-        </Route>
-      </Switch>
-    </Router>
+        </div>
+      ) : (
+        <Button
+          onClick={(e) => requestAuth(e)}
+          style={{ backgroundColor: "#00A512", textTransform: "uppercase" }}
+        >
+          Login On Spotify
+        </Button>
+      )}
+    </div>
   );
 };
 

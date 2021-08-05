@@ -1,4 +1,4 @@
-/* mobile first */
+/* mobile */
 .playlist {
     display: flex;
     flex-direction: row;
@@ -31,8 +31,8 @@
     padding: 1rem;
 }
 
-/* desktop then */
-@media (min-width: 990px) {
+/* desktop */
+@media screen and (min-width: 900px){
     .playlist img {
         width: 150px;
     }

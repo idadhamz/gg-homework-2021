@@ -1,14 +1,15 @@
-/* mobile first */
+/* mobile */
 .playlist {
     padding: 1.5rem;
 }
 
 .playlist h1 {
     font-weight: 900;
+    font-size: 2rem;
 }
 
-/* desktop then */
-@media (min-width: 990px) {
+/* desktop */
+@media screen and (min-width: 900px){
     .playlist {
         padding: 0 8rem;
 
