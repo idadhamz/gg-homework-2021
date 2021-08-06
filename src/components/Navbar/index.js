@@ -2,6 +2,7 @@ import React from "react";
 import style from "./style.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { Text } from "@chakra-ui/react";
 
 // Components
 import Button from "../../components/Button";
@@ -11,11 +12,14 @@ import requestAuth from "../../utils/requestAuth";
 
 // Slices
 import { setAuth } from "../../redux/slices/authSlice";
+import { useColorMode } from "@chakra-ui/react";
 
 const index = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const logoutAction = (e) => {
     e.preventDefault();
@@ -27,26 +31,30 @@ const index = () => {
   return (
     <div className={style.div_navbar}>
       <Link to="/playlist">
-        <h1>Spotify</h1>
+        <Text fontSize="1.8rem" fontWeight="500" m="0">
+          Spotify
+        </Text>
       </Link>
       {isLoggedIn ? (
         <div className={style.div_button}>
+          <Button onClick={toggleColorMode}>
+            Toggle {colorMode === "light" ? "Dark" : "Light"}
+          </Button>
           <Link to="/create-playlist">
-            <Button style={{ backgroundColor: "#00A512" }}>
+            <Button bg="#00A512" color="#fff">
               Create Playlists
             </Button>
           </Link>
-          <Button
-            onClick={(e) => logoutAction(e)}
-            style={{ backgroundColor: "red" }}
-          >
+          <Button onClick={(e) => logoutAction(e)} bg="red" color="#fff">
             Logout Spotify
           </Button>
         </div>
       ) : (
         <Button
           onClick={(e) => requestAuth(e)}
-          style={{ backgroundColor: "#00A512", textTransform: "uppercase" }}
+          bg="#00A512"
+          color="#fff"
+          textTransform="uppercase"
         >
           Login On Spotify
         </Button>

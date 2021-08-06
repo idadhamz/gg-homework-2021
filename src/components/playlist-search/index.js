@@ -17,7 +17,9 @@ const index = ({ handleSubmit, handleChange, input }) => {
         value={input}
         autoComplete="off"
       />
-      <Button type="submit">Search</Button>
+      <Button type="submit" bg="#00A512" margin="1rem 0">
+        Search
+      </Button>
     </form>
   );
 };

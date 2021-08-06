@@ -11,13 +11,13 @@
     text-decoration: none;
 }
 
-.div_navbar a h1 {
+/* .div_navbar a h1 {
     color: black;
     font-size: 1.8rem;
     font-weight: 500;
 
     margin: 0;
-}
+} */
 
 .div_navbar .div_button {
     display: flex;

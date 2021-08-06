@@ -6,9 +6,6 @@
 
     border: 1px solid #d9dadc;
     border-radius: 10px;
-    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
 }
 
 .playlist:hover {

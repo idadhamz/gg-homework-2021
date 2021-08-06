@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Text } from "@chakra-ui/react";
 
 // Components
 import PlaylistSearch from "../../components/playlist-search";
@@ -41,7 +42,9 @@ const index = () => {
   return (
     <>
       <div className={style.div_search}>
-        <h1 className={style.text_h1}>Daftar Track</h1>
+        <Text fontSize="2rem" fontWeight="900">
+          Daftar Track
+        </Text>
 
         <PlaylistSearch
           handleSubmit={handleSubmit}

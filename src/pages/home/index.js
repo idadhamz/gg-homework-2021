@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import style from "./style.module.css";
+// import style from "./style.module.css";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Box, Text } from "@chakra-ui/react";
 
 // Components
 import Button from "../../components/Button";
@@ -34,15 +35,35 @@ const index = () => {
   }, [dispatch]);
 
   return (
-    <div className={style.div_home}>
-      <h1 className={style.h1}>Go Premium. Be Happy.</h1>
+    <Box
+      minH="100vh"
+      display="flex"
+      flexDir="column"
+      justifyContent="center"
+      alignItems="center"
+      bg="#F3BF5A"
+    >
+      <Text
+        fontSize={{ base: "50px", lg: "80px" }}
+        fontWeight="900"
+        lineHeight={{ base: "50px", lg: "92px" }}
+        textAlign="center"
+        color="#fff"
+      >
+        Go Premium. Be Happy.
+      </Text>
       <Button
         onClick={(e) => requestAuth(e)}
-        style={{ backgroundColor: "#00A512", textTransform: "uppercase" }}
+        m="2rem 0"
+        p="2rem"
+        fontSize="16px"
+        fontWeight="400"
+        bg="#00A512"
+        textTransform="uppercase"
       >
         Login On Spotify
       </Button>
-    </div>
+    </Box>
   );
 };
 

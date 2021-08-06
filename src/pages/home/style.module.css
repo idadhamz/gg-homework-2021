@@ -1,4 +1,4 @@
-.div_home {
+/* .div_home {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -6,28 +6,28 @@
     align-items: center;
 
     background-color: #F3BF5A;
-}
+} */
 
-.div_home .h1 {
+/* .div_home .h1 {
     font-size: 50px;
     font-weight: 900;
     line-height: 92px;
     text-align: center;
 
     color: #fff;
-}
+} */
 
-.div_home button {
+/* .div_home button {
     margin: 2rem 0;
 
     font-size: 16px;
     font-weight: 400;
     padding: 16px 52px;
-}
+} */
 
 /* desktop */
-@media screen and (min-width: 900px){
+/* @media screen and (min-width: 900px){
     .div_home .h1 {
         font-size: 80px;
     }
-}
+} */

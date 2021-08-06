@@ -14,10 +14,10 @@
 
         align-items: center;
     }
-    .div_search .text_h1 {
+    /* .div_search .text_h1 {
         font-weight: 900;
         font-size: 2rem;
-    }
+    } */
     .track_playlist {
         display: grid;
         grid-template-columns: 1fr 1fr;

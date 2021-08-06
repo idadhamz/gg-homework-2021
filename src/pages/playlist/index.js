@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Box, Text } from "@chakra-ui/react";
 
 // Pages
 import PlaylistTrack from "../playlist-track";
@@ -48,7 +49,9 @@ const index = () => {
       <>
         <Router>
           {console.log(playlists)}
-          <h1 className={style.text_h1}>Daftar Playlist</h1>
+          <Text fontSize="2rem" fontWeight="900">
+            Daftar Playlist
+          </Text>
           <div className={style.playlists}>
             {playlists.map((playlist) => (
               <Link
@@ -80,9 +83,17 @@ const index = () => {
   };
 
   return (
-    <div className={style.playlist}>
-      <div className={style.list_playlist}>{playlistView()}</div>
-    </div>
+    <Box m="0 auto">
+      <Box
+        display="flex"
+        flexDir="column"
+        gridGap="1rem"
+        m="2rem 0"
+        p={{ base: "0 2rem", lg: "0 8rem" }}
+      >
+        {playlistView()}
+      </Box>
+    </Box>
   );
 };
 

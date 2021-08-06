@@ -5,10 +5,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
 import { Provider } from "react-redux";
+import theme from "./theme";
+import { ColorModeScript } from "@chakra-ui/system";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <App />
     </Provider>
   </React.StrictMode>,

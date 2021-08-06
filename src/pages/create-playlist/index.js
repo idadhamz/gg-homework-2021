@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "./style.module.css";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { Text } from "@chakra-ui/react";
 
 // Components
 import PlaylistForm from "../../components/playlist-form";
@@ -48,7 +49,9 @@ const index = () => {
 
   return (
     <div className={style.playlist}>
-      <h1>Playlist Form</h1>
+      <Text fontSize="2rem" fontWeight="900">
+        Playlist Form
+      </Text>
       <PlaylistForm
         handleSubmitForm={handleSubmitForm}
         handleChangeForm={handleChangeForm}
