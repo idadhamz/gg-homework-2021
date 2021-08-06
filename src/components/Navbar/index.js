@@ -35,30 +35,32 @@ const index = () => {
           Spotify
         </Text>
       </Link>
-      {isLoggedIn ? (
-        <div className={style.div_button}>
-          <Button onClick={toggleColorMode}>
-            Toggle {colorMode === "light" ? "Dark" : "Light"}
-          </Button>
-          <Link to="/create-playlist">
-            <Button bg="#00A512" color="#fff">
-              Create Playlists
-            </Button>
-          </Link>
-          <Button onClick={(e) => logoutAction(e)} bg="red" color="#fff">
-            Logout Spotify
-          </Button>
-        </div>
-      ) : (
-        <Button
-          onClick={(e) => requestAuth(e)}
-          bg="#00A512"
-          color="#fff"
-          textTransform="uppercase"
-        >
-          Login On Spotify
+      <div className={style.div_button}>
+        <Button onClick={toggleColorMode}>
+          Toggle {colorMode === "light" ? "Dark" : "Light"}
         </Button>
-      )}
+        {isLoggedIn ? (
+          <>
+            <Link to="/create-playlist">
+              <Button bg="#00A512" color="#fff">
+                Create Playlists
+              </Button>
+            </Link>
+            <Button onClick={(e) => logoutAction(e)} bg="red" color="#fff">
+              Logout Spotify
+            </Button>
+          </>
+        ) : (
+          <Button
+            onClick={(e) => requestAuth(e)}
+            bg="#00A512"
+            color="#fff"
+            textTransform="uppercase"
+          >
+            Login On Spotify
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

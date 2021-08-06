@@ -59,6 +59,7 @@ const index = () => {
         fontSize="16px"
         fontWeight="400"
         bg="#00A512"
+        color="#fff"
         textTransform="uppercase"
       >
         Login On Spotify

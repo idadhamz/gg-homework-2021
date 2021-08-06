@@ -30,6 +30,7 @@ const index = ({ data, handleSelect, isSelected, playlistId }) => {
           style={{
             backgroundColor: isSelected ? "red" : "#00A512",
           }}
+          color="#fff"
         >
           {isSelected ? `Deselect` : `Select`}
         </Button>

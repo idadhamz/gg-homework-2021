@@ -32,11 +32,11 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }) => {
         required
       />
       <div className={style.button_form}>
-        <Button type="submit" bg="#00A512">
+        <Button type="submit" bg="#00A512" color="#fff">
           Submit
         </Button>
 
-        <Button bg="red">
+        <Button bg="red" color="#fff">
           <Link to="/playlist">Cancel</Link>
         </Button>
       </div>
