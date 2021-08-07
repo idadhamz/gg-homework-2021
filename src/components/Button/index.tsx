@@ -2,7 +2,17 @@ import React from "react";
 // import style from "./style.module.css";
 import { Button } from "@chakra-ui/react";
 
-const index = ({ ...props }) => {
+type Props = {
+  onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>,
+  type?: 'button'|'submit'|'reset',
+  children?: string | JSX.Element,
+  bg?: string,
+  color?: string,
+  margin?: string,
+  style?: React.CSSProperties,
+}
+
+const index = ({ ...props }: Props) => {
   return (
     <Button
       {...props}

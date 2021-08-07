@@ -51,12 +51,7 @@ const index = () => {
             </Button>
           </>
         ) : (
-          <Button
-            onClick={(e) => requestAuth(e)}
-            bg="#00A512"
-            color="#fff"
-            textTransform="uppercase"
-          >
+          <Button onClick={(e) => requestAuth(e)} bg="#00A512" color="#fff">
             Login On Spotify
           </Button>
         )}

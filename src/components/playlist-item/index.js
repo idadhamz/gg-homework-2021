@@ -7,6 +7,8 @@ import Button from "../Button";
 import Image from "../Image";
 
 const index = ({ data, handleSelect, isSelected, playlistId }) => {
+  console.log(data);
+
   const buttonLink = (e, uri, playlist_id) => {
     e.preventDefault();
     handleSelect(uri, playlist_id);

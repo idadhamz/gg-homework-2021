@@ -2,7 +2,7 @@ const requestAuth = (e) => {
   e.preventDefault();
 
   const AUTHORIZE = "https://accounts.spotify.com/authorize";
-  const REDIRECT_URL = "http://localhost:3001/";
+  const REDIRECT_URL = "http://localhost:3000/";
   const SCOPE =
     "user-read-private playlist-read-private playlist-modify-private user-read-email";
 

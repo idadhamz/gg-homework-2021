@@ -3,8 +3,14 @@ import style from "./style.module.css";
 import { Link } from "react-router-dom";
 
 // Components
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Input from "../Input";
+import Button from "../Button";
+
+// type Props = {
+//   handleSubmitForm: React.FormEventHandler<HTMLFormElement>,
+//   handleChangeForm: React.ChangeEventHandler<HTMLInputElement>,
+//   formPlaylist: { title: string; desc: string }
+// }
 
 const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }) => {
   return (

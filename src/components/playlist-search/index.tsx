@@ -2,19 +2,28 @@ import React from "react";
 import style from "./style.module.css";
 
 // Components
-import Input from "../../components/Input";
-import Button from "../../components/Button";
+import Input from "../Input";
+import Button from "../Button";
 
-const index = ({ handleSubmit, handleChange, input }) => {
+type Props = {
+  handleSubmit: React.FormEventHandler<HTMLFormElement>,
+  handleChange: React.ChangeEventHandler<HTMLInputElement>,
+  input: string
+}
+
+const index = ({ handleSubmit, handleChange, input }: Props) => {
+
+  console.log(handleChange)
+
   return (
     <form onSubmit={handleSubmit} className={style.form}>
       <Input
+        id="search"
         type="text"
         name="search"
-        id="search"
-        placeholder="Search Track Title"
         onChange={handleChange}
         value={input}
+        placeholder="Search Track Title"
         autoComplete="off"
       />
       <Button type="submit" bg="#00A512" color="#fff" margin="1rem 0">
