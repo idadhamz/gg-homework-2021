@@ -11,12 +11,13 @@ import Button from "../../components/Button";
 import requestAuth from "../../utils/requestAuth";
 import getAccessToken from "../../utils/getAccessToken";
 
-// Slices
+// Redux
+import { useAppDispatch } from "../../hooks";
 import { setAuth } from "../../redux/slices/authSlice";
 
 const index = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (window.location.hash) {
@@ -60,7 +61,6 @@ const index = () => {
         fontWeight="400"
         bg="#00A512"
         color="#fff"
-        textTransform="uppercase"
       >
         Login On Spotify
       </Button>

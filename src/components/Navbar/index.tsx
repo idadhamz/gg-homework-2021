@@ -5,23 +5,25 @@ import { Link, useHistory } from "react-router-dom";
 import { Text } from "@chakra-ui/react";
 
 // Components
-import Button from "../../components/Button";
+import Button from "../Button";
 
 // Utils
 import requestAuth from "../../utils/requestAuth";
 
-// Slices
-import { setAuth } from "../../redux/slices/authSlice";
+// Redux
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { setAuth, isLoggedIn } from "../../redux/slices/authSlice";
+
 import { useColorMode } from "@chakra-ui/react";
 
 const index = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useAppDispatch();
+  const isLoggedInValue = useAppSelector(isLoggedIn);
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const logoutAction = (e) => {
+  const logoutAction = (e:any) => {
     e.preventDefault();
 
     dispatch(setAuth({ token: null, isLoggedIn: false }));
@@ -36,10 +38,10 @@ const index = () => {
         </Text>
       </Link>
       <div className={style.div_button}>
-        <Button onClick={toggleColorMode}>
+        <Button onClick={toggleColorMode} type="button">
           Toggle {colorMode === "light" ? "Dark" : "Light"}
         </Button>
-        {isLoggedIn ? (
+        {isLoggedInValue ? (
           <>
             <Link to="/create-playlist">
               <Button bg="#00A512" color="#fff">

@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import Input from "../Input";
 import Button from "../Button";
 
-// type Props = {
-//   handleSubmitForm: React.FormEventHandler<HTMLFormElement>,
-//   handleChangeForm: React.ChangeEventHandler<HTMLInputElement>,
-//   formPlaylist: { title: string; desc: string }
-// }
+type Props = {
+  handleSubmitForm: React.FormEventHandler<HTMLFormElement>,
+  handleChangeForm: React.ChangeEventHandler<HTMLInputElement>,
+  formPlaylist: { title: string; desc: string }
+}
 
-const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }) => {
+const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }: Props) => {
   return (
     <form onSubmit={handleSubmitForm} className={style.playlist_form}>
       <Input

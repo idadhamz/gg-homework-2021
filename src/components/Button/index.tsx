@@ -5,10 +5,14 @@ import { Button } from "@chakra-ui/react";
 type Props = {
   onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>,
   type?: 'button'|'submit'|'reset',
-  children?: string | JSX.Element,
+  children?: string | JSX.Element | any,
   bg?: string,
   color?: string,
   margin?: string,
+  m?: string,
+  p?: string,
+  fontSize?: string,
+  fontWeight?: string,
   style?: React.CSSProperties,
 }
 

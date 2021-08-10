@@ -2,7 +2,12 @@ import React from "react";
 // import style from "./style.module.css";
 import { Box, Text } from "@chakra-ui/react";
 
-const index = ({ title = "-", artists = "-" }) => {
+type Props = {
+  title?: string,
+  artists?: string,
+}
+
+const index = ({ title = "-", artists = "-" }: Props) => {
   return (
     <Box display="flex" flexDir="column" width="auto" mb="10px">
       <Text fontSize={{ base: "1rem", lg: "1.3rem" }} fontWeight="bold" m="0">

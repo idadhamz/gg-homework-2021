@@ -1,15 +1,22 @@
 import React from "react";
 import style from "./style.module.css";
 
+import dataExample from "../../data/index";
+
 // Components
 import PlaylistText from "../playlist-text";
 import Button from "../Button";
 import Image from "../Image";
 
-const index = ({ data, handleSelect, isSelected, playlistId }) => {
-  console.log(data);
+type Props = {
+  data?: any,
+  handleSelect?: any,
+  isSelected?: boolean,
+  playlistId?: string|undefined
+}
 
-  const buttonLink = (e, uri, playlist_id) => {
+const index = ({ data, handleSelect, isSelected, playlistId }: Props) => {
+  const buttonLink = (e: any, uri: string, playlist_id:string|undefined) => {
     e.preventDefault();
     handleSelect(uri, playlist_id);
   };
@@ -17,15 +24,15 @@ const index = ({ data, handleSelect, isSelected, playlistId }) => {
   return (
     <div className={style.playlist}>
       <Image
-        src={data.album.images[0].url}
-        width={data.album.images[0].width}
-        height={data.album.images[0].height}
+        src={dataExample[0].album.images[0].url}
+        alt={dataExample[0].album.name}
+        width={dataExample[0].album.images[0].width}
+        height={dataExample[0].album.images[0].height}
       />
       <div className={style.content_playlist}>
         <PlaylistText
-          title={data.album.name}
-          artists={data.album.artists[0].name}
-          album={data.album.name}
+          title={dataExample[0].album.name}
+          artists={dataExample[0].album.artists[0].name}
         />
         <Button
           onClick={(e) => buttonLink(e, data.uri, playlistId)}

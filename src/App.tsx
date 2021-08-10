@@ -1,6 +1,5 @@
 import React from "react";
 import "./App.css";
-import { useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,11 +16,12 @@ import CreatePlaylist from "./pages/create-playlist";
 // Components
 import Navbar from "./components/Navbar";
 
+// Redux
+import { useAppSelector } from "./hooks";
+import { isLoggedIn } from "./redux/slices/authSlice";
+
 const App = () => {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  console.log(isLoggedIn);
-
+  const isLoggedInValue = useAppSelector(isLoggedIn);
   return (
     <Router>
       <ChakraProvider>
@@ -33,10 +33,10 @@ const App = () => {
                 <Home />
               </Route>
               <Route exact path="/playlist">
-                {isLoggedIn ? <Playlist /> : <Redirect to="/" />}
+                {isLoggedInValue ? <Playlist /> : <Redirect to="/" />}
               </Route>
               <Route exact path="/create-playlist">
-                {isLoggedIn ? <CreatePlaylist /> : <Redirect to="/" />}
+                {isLoggedInValue ? <CreatePlaylist /> : <Redirect to="/" />}
               </Route>
             </div>
           </Switch>

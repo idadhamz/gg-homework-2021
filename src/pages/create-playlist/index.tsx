@@ -7,28 +7,32 @@ import { Text } from "@chakra-ui/react";
 // Components
 import PlaylistForm from "../../components/playlist-form";
 
+// Redux
+import { useAppSelector } from "../../hooks";
+import { token, user } from "../../redux/slices/authSlice";
+
 const index = () => {
   let history = useHistory();
-  const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user);
+  const tokenValue = useAppSelector(token);
+  const userValue = useAppSelector(user);
   const [formPlaylist, setFormPlaylist] = useState({
     title: "",
     desc: "",
   });
 
-  const handleChangeForm = (e) => {
+  const handleChangeForm = (e:any) => {
     const { name, value } = e.target;
     setFormPlaylist({ ...formPlaylist, [name]: value });
   };
 
-  const handleSubmitForm = async (e) => {
+  const handleSubmitForm = async (e:any) => {
     e.preventDefault();
 
-    const users_id = user.id;
+    const users_id = userValue.id;
     const reqOptions = {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + `${token}`,
+        Authorization: "Bearer " + `${tokenValue}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
