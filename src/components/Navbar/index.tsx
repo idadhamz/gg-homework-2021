@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./style.module.css";
-import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Text } from "@chakra-ui/react";
 

@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./style.module.css";
-import { Link } from "react-router-dom";
 
 // Components
 import Input from "../Input";
