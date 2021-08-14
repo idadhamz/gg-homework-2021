@@ -12,7 +12,7 @@ import requestAuth from "../../utils/requestAuth";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { setAuth, isLoggedIn } from "../../redux/slices/authSlice";
+import { setAuth, isLoggedIn, user } from "../../redux/slices/authSlice";
 
 import { useColorMode } from "@chakra-ui/react";
 
@@ -20,6 +20,7 @@ const index = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const isLoggedInValue = useAppSelector(isLoggedIn);
+  const userValue = useAppSelector(user)
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -30,9 +31,11 @@ const index = () => {
     history.push("/");
   };
 
+  console.log(userValue);
+
   return (
     <div className={style.div_navbar}>
-      <Link to="/playlist">
+      <Link to="/create-playlist">
         <Text fontSize="1.8rem" fontWeight="500" m="0">
           Spotify
         </Text>
@@ -46,6 +49,11 @@ const index = () => {
             <Link to="/create-playlist">
               <Button bg="#00A512" color="#fff">
                 Create Playlists
+              </Button>
+            </Link>
+            <Link to="/playlist">
+              <Button bg="#00A512" color="#fff">
+                {userValue.display_name} Playlists
               </Button>
             </Link>
             <Button onClick={(e) => logoutAction(e)} bg="red" color="#fff">

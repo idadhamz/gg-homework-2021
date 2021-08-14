@@ -1,17 +1,21 @@
 /* mobile */
-.playlist {
-    padding: 1.5rem;
+.track_playlist {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
 }
-
-/* .playlist h1 {
-    font-weight: 900;
-    font-size: 2rem;
-} */
 
 /* desktop */
 @media screen and (min-width: 900px){
-    .playlist {
-        padding: 0 8rem;
-        margin: 3rem 0;
+    .div_search {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        align-items: center;
+    }
+    .track_playlist {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }

@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedTrack: {
-    playlists: { id: "", tracks: [] },
-  },
+  selectedTrack: [],
 };
 
 export const trackSlice = createSlice({
@@ -11,11 +9,14 @@ export const trackSlice = createSlice({
   initialState,
   reducers: {
     setSelectedTrack: (state, action) => {
-      state.selectedTrack.playlists.tracks.push(action.payload);
+      state.selectedTrack = action.payload;
+    },
+    setNullSelectedTrack: (state) => {
+      state.selectedTrack = [];
     },
   },
 });
 
-export const { setSelectedTrack } = trackSlice.actions;
+export const { setSelectedTrack, setNullSelectedTrack } = trackSlice.actions;
 
 export default trackSlice.reducer;

@@ -10,8 +10,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 // Pages
 import Home from "./pages/home";
-import Playlist from "./pages/playlist";
 import CreatePlaylist from "./pages/create-playlist";
+import Playlist from "./pages/playlist";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -32,11 +32,11 @@ const App = () => {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route exact path="/playlist">
-                {isLoggedInValue ? <Playlist /> : <Redirect to="/" />}
-              </Route>
               <Route exact path="/create-playlist">
                 {isLoggedInValue ? <CreatePlaylist /> : <Redirect to="/" />}
+              </Route>
+              <Route exact path="/playlist">
+                {isLoggedInValue ? <Playlist /> : <Redirect to="/" />}
               </Route>
             </div>
           </Switch>

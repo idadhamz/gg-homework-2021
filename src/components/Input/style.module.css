@@ -14,13 +14,22 @@
 
     font-size: 1.1rem;
     font-weight: normal;
-
-    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
 }
 
 .input:focus {
     outline: none !important;
     border: 2px solid #4DC05A;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #000;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #000;
 }

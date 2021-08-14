@@ -1,8 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
 
-import dataExample from "../../data/index";
-
 // Components
 import PlaylistText from "../playlist-text";
 import Button from "../Button";
@@ -15,27 +13,27 @@ type Props = {
   playlistId?: string|undefined
 }
 
-const index = ({ data, handleSelect, isSelected, playlistId }: Props) => {
-  const buttonLink = (e: any, uri: string, playlist_id:string|undefined) => {
+const index = ({ data, handleSelect, isSelected }: Props) => {
+  const buttonLink = (e: any, uri: string) => {
     e.preventDefault();
-    handleSelect(uri, playlist_id);
+    handleSelect(uri);
   };
 
   return (
     <div className={style.playlist}>
       <Image
-        src={dataExample[0].album.images[0].url}
-        alt={dataExample[0].album.name}
-        width={dataExample[0].album.images[0].width}
-        height={dataExample[0].album.images[0].height}
+        src={data.album.images[0].url}
+        alt={data.album.name}
+        width={data.album.images[0].width}
+        height={data.album.images[0].height}
       />
       <div className={style.content_playlist}>
         <PlaylistText
-          title={dataExample[0].album.name}
-          artists={dataExample[0].album.artists[0].name}
+          title={data.album.name}
+          artists={data.album.artists[0].name}
         />
         <Button
-          onClick={(e) => buttonLink(e, data.uri, playlistId)}
+          onClick={(e) => buttonLink(e, data.uri)}
           style={{
             backgroundColor: isSelected ? "red" : "#00A512",
           }}

@@ -12,9 +12,6 @@ type Props = {
 }
 
 const index = ({ handleSubmit, handleChange, input }: Props) => {
-
-  console.log(handleChange)
-
   return (
     <form onSubmit={handleSubmit} className={style.form}>
       <Input

@@ -41,10 +41,6 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }: Props) => {
         <Button type="submit" bg="#00A512" color="#fff">
           Submit
         </Button>
-
-        <Button bg="red" color="#fff">
-          <Link to="/playlist">Cancel</Link>
-        </Button>
       </div>
     </form>
   );

@@ -4,21 +4,27 @@ import { render, screen } from "@testing-library/react";
 import fireEvent from "@testing-library/user-event";
 
 // Components
-import TrackItem from "./components/playlist-item/index";
+import TrackItem from "./components/track-item/index";
 
 // Data
 import dataExample from "./data/index";
 
 // eslint-disable-next-line no-undef
 test("all tracks element are rendered", () => {
-  render(<TrackItem />);
+  render(<TrackItem data={dataExample[0]} />);
 
   const ImageTrack = screen.getByRole("img");
-  const titleText = screen.getByText(dataExample[0].album.name);
-  const artistsText = screen.getByText(dataExample[0].album.artists[0].name);
+  const titleText = screen.getByText("A Night At The Opera (2011 Remaster)");
+  const artistsText = screen.getByText("Queen");
 
-  expect(ImageTrack).toHaveAttribute("src", dataExample[0].album.images[0].url);
-  expect(ImageTrack).toHaveAttribute("alt", dataExample[0].album.name);
+  expect(ImageTrack).toHaveAttribute(
+    "src",
+    "https://i.scdn.co/image/ab67616d0000b273e319baafd16e84f0408af2a0"
+  );
+  expect(ImageTrack).toHaveAttribute(
+    "alt",
+    "A Night At The Opera (2011 Remaster)"
+  );
   expect(titleText).toBeInTheDocument();
   expect(artistsText).toBeInTheDocument();
   // screen.debug();
@@ -27,8 +33,7 @@ test("all tracks element are rendered", () => {
 test("output uri after click must same with data", () => {
   render(
     <TrackItem
-      data={dataExample[0].album}
-      isSelected={true}
+      data={dataExample[0]}
       handleSelect={(uri) => {
         console.log(uri);
       }}

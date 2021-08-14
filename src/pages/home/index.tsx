@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 // import style from "./style.module.css";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Box, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 // Components
 import Button from "../../components/Button";
@@ -22,26 +21,24 @@ const index = () => {
   useEffect(() => {
     if (window.location.hash) {
       const { access_token } = getAccessToken(window.location.hash);
-      console.log(access_token);
       dispatch(
         setAuth({
           token: access_token,
           isLoggedIn: true,
         })
       );
-      history.push("/playlist");
+      history.push("/create-playlist");
     } else {
       dispatch(setAuth({ token: null, isLoggedIn: false }));
     }
   }, [dispatch]);
 
   return (
-    <Box
-      minH="100vh"
-      display="flex"
+    <Flex
       flexDir="column"
       justifyContent="center"
       alignItems="center"
+      minH="100vh"
       bg="#F3BF5A"
     >
       <Text
@@ -64,7 +61,7 @@ const index = () => {
       >
         Login On Spotify
       </Button>
-    </Box>
+    </Flex>
   );
 };
 
