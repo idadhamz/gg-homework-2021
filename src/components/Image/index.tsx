@@ -4,8 +4,8 @@ import style from "./style.module.css";
 type Props = {
   src?: string,
   alt?: string,
-  width?: number,
-  height?: number,
+  width?: number | string,
+  height?: number | string,
 }
 
 const index = ({ ...props }: Props) => {

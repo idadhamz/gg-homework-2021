@@ -1,9 +1,12 @@
 import React from "react";
 import style from "./style.module.css";
 import { Link, useHistory } from "react-router-dom";
-import { Text } from "@chakra-ui/react";
+
+// Assets
+import SpotifyIcon from "../../assets/img/spotify.png";
 
 // Components
+import Image from "../Image";
 import Button from "../Button";
 
 // Utils
@@ -35,9 +38,9 @@ const index = () => {
   return (
     <div className={style.div_navbar}>
       <Link to="/create-playlist">
-        <Text fontSize="1.8rem" fontWeight="500" m="0">
-          Spotify
-        </Text>
+        <Image
+          src={SpotifyIcon}
+        />
       </Link>
       <div className={style.div_button}>
         <Button onClick={toggleColorMode} type="button">

@@ -4,39 +4,23 @@
     flex-direction: column;
 }
 
-.button_form {
-    display: flex;
-    gap: 0.5rem;
+.playlist_form button {
+    width: 100%;
+    height: auto;
 
-    padding: 0.5rem 0;
-}
-
-.cancel_form {
-    border: none;
-    background-color: red;
-    color: white;
-
-    padding: 1em 1.5em;
-    text-decoration: none;
-    border-radius: 2rem;
-
-    width: auto;
-    height: fit-content;
-    align-self: flex-start;
-
-    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-}
-
-.cancel_form:hover {
-    opacity: 0.7;
-    cursor: pointer;
+    padding: 1rem;
 }
 
 /* desktop */
 @media screen and (min-width: 900px){
     .playlist_form {
         width: 300px;
+    }
+
+    .playlist_form button {
+        width: 100%;
+        height: auto;
+    
+        padding: 1rem;
     }
 }

@@ -2,7 +2,7 @@
 .div_navbar {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     border-bottom: 1px solid #d9dadc;
     padding: 1.5rem;
 }
@@ -11,19 +11,24 @@
     text-decoration: none;
 }
 
-/* .div_navbar a h1 {
-    color: black;
-    font-size: 1.8rem;
-    font-weight: 500;
-
-    margin: 0;
-} */
+.div_navbar img {
+    width: 50px;
+    height: auto;
+}
 
 .div_navbar .div_button {
     display: flex;
-    gap: 0.7rem;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+    width: 100%;
+}
 
-    margin: 1.5rem 0;
+.div_navbar .div_button button {
+    width: 100%;
+    height: auto;
+
+    padding: 1rem 1.5rem;
 }
 
 /* desktop */
@@ -39,5 +44,17 @@
 
     .div_navbar h1 {
         margin: 3rem 0;
+    }
+
+    .div_navbar img {
+        width: 50px;
+        height: auto;
+    }
+
+    .div_navbar .div_button {
+        flex-direction: row;
+        gap: 0.7rem;
+        margin: 1.5rem 0;
+        width: auto;
     }
 }

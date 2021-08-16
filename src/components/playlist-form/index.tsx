@@ -36,11 +36,9 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }: Props) => {
         minLength="20"
         required
       />
-      <div className={style.button_form}>
-        <Button type="submit" bg="#00A512" color="#fff">
-          Submit
-        </Button>
-      </div>
+      <Button type="submit" bg="#00A512" color="#fff">
+        Submit
+      </Button>
     </form>
   );
 };

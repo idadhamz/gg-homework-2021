@@ -1,4 +1,8 @@
 /* mobile */
+.div_search {
+    margin: 1rem 0;
+}
+
 .track_playlist {
     display: grid;
     grid-template-columns: 1fr;
