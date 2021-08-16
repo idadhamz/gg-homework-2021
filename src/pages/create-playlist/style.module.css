@@ -21,5 +21,7 @@
     .track_playlist {
         display: grid;
         grid-template-columns: 1fr 1fr;
+
+        margin: 2rem 0;
     }
 }

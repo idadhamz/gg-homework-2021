@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 import { useSelector } from "react-redux";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Box, Flex, Text } from "@chakra-ui/react";
-
-// Pages
+import {
+  Box,
+  Flex,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+} from "@chakra-ui/react";
 
 // Components
 import Image from "../../components/Image";
 
 // Services
-import { getUserPlaylists } from "../../services/apiSpotify";
+import { getUserPlaylists, getTrackPlaylist } from "../../services/apiSpotify";
+
+// Utils
+import convertMsToMinutes from "../../utils/convertMsToMinutes";
 
 const index = () => {
   const token = useSelector((state) => state.auth.token);
 
   const [playlists, setPlaylists] = useState([]);
+  const [playlistTrack, setPlaylistTrack] = useState([]);
 
   useEffect(() => {
     if (token) {
@@ -23,20 +34,31 @@ const index = () => {
     }
   }, [token]);
 
+  const selectPlaylist = (e, playlist_id) => {
+    e.preventDefault();
+
+    if (playlist_id) {
+      getTrackPlaylist(token, playlist_id).then((data) =>
+        setPlaylistTrack(data.items)
+      );
+    }
+  };
+
+  console.log(playlistTrack);
+
   const playlistView = () => {
     return (
-      <>
-        <Router>
-          {console.log(playlists)}
+      <Flex dir="row" justify="space-between" gridGap="2rem">
+        <Box>
           <Text fontSize="2rem" fontWeight="900">
-            Daftar Playlist
+            List Playlist
           </Text>
           <div className={style.playlists}>
             {playlists.map((playlist) => (
-              <Link
-                to={`/playlist/${playlist.id}`}
+              <div
                 key={playlist.id}
                 className={style.item_playlist}
+                onClick={(e) => selectPlaylist(e, playlist.id)}
               >
                 <Image
                   src={playlist.images[0]?.url}
@@ -47,15 +69,43 @@ const index = () => {
                   <h1>{playlist.name}</h1>
                   <p>{playlist.description}</p>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
-
-          <Switch>
-            <Route path="/playlist/:id"></Route>
-          </Switch>
-        </Router>
-      </>
+        </Box>
+        {playlistTrack && (
+          <Box>
+            <Text fontSize="2rem" fontWeight="900">
+              List Tracks Playlist
+            </Text>
+            <Table
+              variant="striped"
+              size="lg"
+              margin="2rem 0"
+              borderRadius="1rem"
+            >
+              <Thead>
+                <Tr>
+                  <Th>#</Th>
+                  <Th>TITLE</Th>
+                  <Th>ALBUM</Th>
+                  <Th>DURATION</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {playlistTrack.map((item, idx) => (
+                  <Tr key={item.track.id}>
+                    <Td>{idx + 1}</Td>
+                    <Td>{item.track.name}</Td>
+                    <Td>{item.track.album.name}</Td>
+                    <Td>{convertMsToMinutes(item.track.duration_ms)}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </Box>
+        )}
+      </Flex>
     );
   };
 

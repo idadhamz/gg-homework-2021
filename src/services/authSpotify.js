@@ -1,4 +1,4 @@
-const requestAuth = (e) => {
+const authSpotify = (e) => {
   e.preventDefault();
 
   const AUTHORIZE = "https://accounts.spotify.com/authorize";
@@ -17,4 +17,4 @@ const requestAuth = (e) => {
   window.location.href = URL;
 };
 
-export default requestAuth;
+export default authSpotify;

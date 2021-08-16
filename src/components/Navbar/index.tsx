@@ -10,7 +10,7 @@ import Image from "../Image";
 import Button from "../Button";
 
 // Utils
-import requestAuth from "../../utils/requestAuth";
+import authSpotify from "../../services/authSpotify";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -32,8 +32,6 @@ const index = () => {
     dispatch(setAuth({ token: null, isLoggedIn: false }));
     history.push("/");
   };
-
-  console.log(userValue);
 
   return (
     <div className={style.div_navbar}>
@@ -63,7 +61,7 @@ const index = () => {
             </Button>
           </>
         ) : (
-          <Button onClick={(e) => requestAuth(e)} bg="#00A512" color="#fff">
+          <Button onClick={(e) => authSpotify(e)} bg="#00A512" color="#fff">
             Login On Spotify
           </Button>
         )}

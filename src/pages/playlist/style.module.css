@@ -3,23 +3,12 @@
 }
 
 /* mobile */
-/* .list_playlist {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 2rem 0;
-    padding: 0 2rem;
-}
-
-.text_h1 {
-    font-weight: 900;
-    font-size: 2rem;
-} */
-
 .playlists {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+
+    margin: 2rem 0;
 }
 
 .playlists .item_playlist {

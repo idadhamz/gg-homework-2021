@@ -7,8 +7,10 @@ import { Flex, Text } from "@chakra-ui/react";
 import Button from "../../components/Button";
 
 // Utils
-import requestAuth from "../../utils/requestAuth";
 import getAccessToken from "../../utils/getAccessToken";
+
+// Services
+import authSpotify from "../../services/authSpotify";
 
 // Redux
 import { useAppDispatch } from "../../hooks";
@@ -40,6 +42,7 @@ const index = () => {
       alignItems="center"
       minH="100vh"
       bg="#F3BF5A"
+      p="2rem"
     >
       <Text
         fontSize={{ base: "50px", lg: "80px" }}
@@ -51,7 +54,7 @@ const index = () => {
         Go Premium. Be Happy.
       </Text>
       <Button
-        onClick={(e) => requestAuth(e)}
+        onClick={(e) => authSpotify(e)}
         m="2rem 0"
         p="2rem"
         fontSize="16px"

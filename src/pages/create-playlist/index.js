@@ -86,24 +86,12 @@ const index = () => {
       direction={{ base: "column", lg: "row" }}
       justify="space-between"
       gridGap="2rem"
-      p={{ base: "2rem 2rem", lg: "2rem 8rem" }}
+      p={{ base: "0 2rem", lg: "0 8rem" }}
     >
       <Box>
-        <Text
-          width="100%"
-          bg="#F2F6F9"
-          color="#000"
-          p="1rem 1.5rem"
-          border="1.5px solid gray"
-          borderRadius="1rem"
-          textAlign="center"
-          textTransform="uppercase"
-        >
-          1. Select Track Terlebih Dahulu
-        </Text>
         <div className={style.div_search}>
           <Text fontSize="2rem" fontWeight="900">
-            Daftar Track
+            List Track
           </Text>
 
           <TrackSearch
@@ -126,18 +114,6 @@ const index = () => {
         </div>
       </Box>
       <Box p={{ base: "0", lg: "0 1.5rem" }}>
-        <Text
-          width="100%"
-          bg="#F2F6F9"
-          color="#000"
-          p="1rem 1.5rem"
-          border="1.5px solid gray"
-          borderRadius="1rem"
-          textAlign="center"
-          textTransform="uppercase"
-        >
-          2. Buat Playlist (Nama & Deskripsi)
-        </Text>
         <Text fontSize="2rem" fontWeight="900" p="2rem 0">
           Playlist Form
         </Text>
