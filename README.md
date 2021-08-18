@@ -45,11 +45,11 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
 ## Additional Features
 - Fitur **melihat daftar Playlist** dari pengguna yang telah dibuat sebelumnya
 - Fitur **melihat daftar Track Song dari Playlist** pengguna yang ingin dilihat, seperti data:
-    - Judul
-    - Album
-    - Durasi Lagu
-    - Button Play lagu ➡️ yang dapat langsung mengakses Track lagu yang ingin dimainkan pada aplikasi Spotify nya langsung
-- Fitur menampilkan data pengguna yaitu **Nama dan Foto Profil Pengguna**
+    - **Judul**
+    - **Album**
+    - **Durasi Lagu**
+    - **Button Play lagu** ➡️ langsung mengakses Track lagu yang ingin dimainkan pada aplikasi **SPOTIFY**
+- Fitur menampilkan data pengguna (**Nama dan Foto Profil Pengguna**)
 
 ## How To Run Web App ini? 🤔
 1. Pertama kalian bisa melakukan cloning Web App ini menggunakan URL berikut `https://github.com/idadhamz/generasi-gigih-homework.git`
@@ -60,17 +60,16 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
 
 dan taraa Web App berhasil dijalankan pada server local hingga tampil seperti contoh dibawah ini ⬇️
 
-![Semantic description of image](https://i.ibb.co/NnLHc4g/SS-Spotify-Clone.png) <center>*Hasil Web App Spotify Clone*</center>
+![Semantic description of image](https://i.ibb.co/NnLHc4g/SS-Spotify-Clone.png) <center>***Hasil Web App Spotify Clone***</center>
 
 ## The Last, Conclusion 🥰
 Web App Spotify Clone ini masih terus dilakukan pengembangan dan tambahan tentang penulisan kode yang baik dan efektif juga penambahan fitur yang lebih lengkap dan kompleks. 
 
 Terbuka untuk pengembangan Open Source juga jika kalian ⬇️ 
-- menemukan error, 
-- bug atau 
-- refactor code yang lebih baik
-- Atau ada tambahan feature yang kalian inginkan
+- Menemukan error atau bugs 
+- Refactor code dengan menerapkan Clean Code yang lebih baik
+- Atau ingin adanya tambahan feature yang kalian perlukan
 
-Contact saya melalui 🌐 [Personal Website]("http://idadilham.site/") atau email workwithdadi@gmail.com
+Pertanyaan lebih lanjut terkait project Web App ini atau hal lain dapat contact saya melalui 🌐 [Personal Website](http://idadilham.site/) atau email workwithdadi@gmail.com ya 🙌🙏
 
-**Dadi Ilham, August 2021**
+**<h3>Dadi Ilham (August 2021)</h3>**
