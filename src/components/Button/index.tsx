@@ -3,18 +3,18 @@ import React from "react";
 import { Button } from "@chakra-ui/react";
 
 type Props = {
-  onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>,
-  type?: 'button'|'submit'|'reset',
-  children?: string | JSX.Element | any,
-  bg?: string,
-  color?: string,
-  margin?: string,
-  m?: string,
-  p?: string,
-  fontSize?: string,
-  fontWeight?: string,
-  style?: React.CSSProperties,
-}
+  onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  type?: "button" | "submit" | "reset";
+  children?: string | JSX.Element | any;
+  bg?: string;
+  color?: string;
+  margin?: any;
+  m?: any;
+  p?: string;
+  fontSize?: string;
+  fontWeight?: string;
+  style?: React.CSSProperties;
+};
 
 const index = ({ ...props }: Props) => {
   return (

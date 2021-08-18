@@ -1,36 +1,36 @@
 const API_SPOTIFY = "https://api.spotify.com/v1";
 
-const getUserProfile = async (token) => {
+const getUserProfile = async (tokenValue) => {
   return await fetch(`${API_SPOTIFY}/me`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenValue,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json());
 };
 
-const getUserPlaylists = async (token) => {
+const getUserPlaylists = async (tokenValue) => {
   return await fetch(`${API_SPOTIFY}/me/playlists`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenValue,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json());
 };
 
-const getTrackPlaylist = async (token, playlist_id) => {
-  return await fetch(`${API_SPOTIFY}/playlists/${playlist_id}/tracks`, {
+const getTrackPlaylist = async (tokenValue, playlistId) => {
+  return await fetch(`${API_SPOTIFY}/playlists/${playlistId}/tracks`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenValue,
       "Content-Type": "application/json",
     },
   }).then((res) => res.json());
 };
 
-const getSearchTrack = async (token, input) => {
+const getSearchTrack = async (tokenValue, input) => {
   const reqOptions = {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenValue,
       "Content-Type": "application/json",
     },
   };
@@ -40,11 +40,11 @@ const getSearchTrack = async (token, input) => {
   ).then((res) => res.json());
 };
 
-const createNewPlaylist = async (token, userId, newPlaylist) => {
+const createNewPlaylist = async (tokenValue, userId, newPlaylist) => {
   const reqOptions = {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenValue,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -60,20 +60,38 @@ const createNewPlaylist = async (token, userId, newPlaylist) => {
   ).then((res) => res.json());
 };
 
-const addTrackToPlaylist = async (token, newPlaylistId, track) => {
+const addTrackToPlaylist = async (
+  tokenValue,
+  newPlaylistId,
+  selectedTracks
+) => {
   const reqOptions = {
     method: "POST",
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenValue,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      uris: track,
+      uris: selectedTracks,
       position: 0,
     }),
   };
   return await fetch(
-    `${API_SPOTIFY}/playlists/${newPlaylistId}/tracks?uris=${track}`,
+    `${API_SPOTIFY}/playlists/${newPlaylistId}/tracks?uris=${selectedTracks}`,
+    reqOptions
+  ).then((res) => res.json());
+};
+
+const unFollowPlaylist = async (tokenValue, playlistId) => {
+  const reqOptions = {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + tokenValue,
+      "Content-Type": "application/json",
+    },
+  };
+  return await fetch(
+    `${API_SPOTIFY}/playlists/${playlistId}/followers`,
     reqOptions
   ).then((res) => res.json());
 };
@@ -85,4 +103,5 @@ export {
   getSearchTrack,
   createNewPlaylist,
   addTrackToPlaylist,
+  unFollowPlaylist,
 };

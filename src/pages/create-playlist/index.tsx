@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 import { Flex, Box, Text } from "@chakra-ui/react";
 import toast, { Toaster } from "react-hot-toast";
+import { useHistory } from "react-router-dom";
 
 // Components
 import TrackSearch from "../../components/track-search";
@@ -32,6 +33,7 @@ import {
 } from "../../services/apiSpotify";
 
 const index = () => {
+  const history = useHistory();
   const dispatch = useAppDispatch();
 
   const tokenValue = useAppSelector(token);
@@ -76,10 +78,11 @@ const index = () => {
 
     if (selectedTracks.length > 0) {
       const userId = userValue?.id;
-      createNewPlaylist(tokenValue, userId, formPlaylist).then((newPlaylist) =>
-        addTrackToPlaylist(tokenValue, newPlaylist.id, selectedTracks).then(
-          (data) => console.log(data)
-        )
+      await createNewPlaylist(tokenValue, userId, formPlaylist).then(
+        (newPlaylist) =>
+          addTrackToPlaylist(tokenValue, newPlaylist.id, selectedTracks).then(
+            (data) => console.log(data)
+          )
       );
 
       toast(`Create Playlist ${formPlaylist.title} Successfully`, {
@@ -90,6 +93,7 @@ const index = () => {
       });
       dispatch(clearSelectedTrack());
       dispatch(clearForm());
+      history.push("/playlist");
     }
   };
 

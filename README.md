@@ -70,6 +70,4 @@ Terbuka untuk pengembangan Open Source juga jika kalian ⬇️
 - Refactor code dengan menerapkan Clean Code yang lebih baik
 - Atau ingin adanya tambahan feature yang kalian perlukan
 
-Pertanyaan lebih lanjut terkait project Web App ini atau hal lain dapat contact saya melalui 🌐 [Personal Website](http://idadilham.site/) atau email workwithdadi@gmail.com ya 🙌🙏
-
-**<h3>Dadi Ilham (August 2021)</h3>**
+Pertanyaan lebih lanjut terkait project Web App ini atau hal lain dapat contact saya melalui 🌐 [Personal Website](http://idadilham.site/){:target="_blank"} atau email workwithdadi@gmail.com ya 🙌🙏

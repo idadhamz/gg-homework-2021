@@ -22,11 +22,11 @@
     color: black;
 }
 
-.playlists .item_playlist:hover {
+/* .playlists .item_playlist:hover {
     background-color: lightgray;
     transition: all .15s ease;
     cursor: pointer;
-}
+} */
 
 .playlists .item_playlist img {
     min-width: 100%;
@@ -43,7 +43,6 @@
 
 .playlists .item_playlist .text_playlist h1 {
     margin: 10px 0;
-
     font-size: 1.5rem;
 }
 

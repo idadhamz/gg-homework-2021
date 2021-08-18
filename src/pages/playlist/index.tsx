@@ -12,13 +12,19 @@ import {
   Td,
 } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
+import { BsTrashFill } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 
 // Components
 import Image from "../../components/Image";
+import Button from "../../components/Button";
 
 // Services
-import { getUserPlaylists, getTrackPlaylist } from "../../services/apiSpotify";
+import {
+  getUserPlaylists,
+  getTrackPlaylist,
+  unFollowPlaylist,
+} from "../../services/apiSpotify";
 
 // Redux
 import { useAppSelector } from "../../redux/hooks";
@@ -38,19 +44,11 @@ const index = () => {
   const [playlistTrack, setPlaylistTrack] = useState([]);
 
   useEffect(() => {
-    if (tokenValue) {
-      getUserPlaylists(tokenValue).then((data) => setPlaylists(data.items));
-    }
-  }, [tokenValue]);
+    getUserPlaylists(tokenValue).then((data) => setPlaylists(data.items));
+  }, [playlists]);
 
   const selectPlaylist = (e: any, playlist: any) => {
     e.preventDefault();
-    toast(`${playlist.name} Selected`, {
-      duration: 2000,
-      position: "bottom-right",
-      icon: "👏",
-      style: { backgroundColor: "#4DC05A", color: "#fff" },
-    });
     if (playlist) {
       const { id, name, description } = playlist;
       getTrackPlaylist(tokenValue, id).then((data) =>
@@ -59,7 +57,29 @@ const index = () => {
       setPlaylistName(name);
       setPlaylistDescription(description);
     }
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    toast(`${playlist.name} Selected`, {
+      duration: 2000,
+      position: "bottom-right",
+      icon: "👏",
+      style: { backgroundColor: "#4DC05A", color: "#fff" },
+    });
+  };
+
+  const unFollowAction = (e: any, playlist: any) => {
+    e.preventDefault();
+    const { id, name } = playlist;
+    if (id) {
+      unFollowPlaylist(tokenValue, id).then((data) => console.log(data));
+      setPlaylistTrack([]);
+      setPlaylistName("");
+      setPlaylistDescription("");
+    }
+    toast(`Unfollow Playlist ${name} Succesfully`, {
+      duration: 2000,
+      position: "bottom-right",
+      icon: "👏",
+      style: { backgroundColor: "red", color: "#fff" },
+    });
   };
 
   const playlistView = () => {
@@ -75,11 +95,7 @@ const index = () => {
           </Text>
           <Box className={style.playlists}>
             {playlists.map((playlist: any) => (
-              <Box
-                key={playlist.id}
-                className={style.item_playlist}
-                onClick={(e) => selectPlaylist(e, playlist)}
-              >
+              <Box key={playlist.id} className={style.item_playlist}>
                 <Image
                   src={playlist.images[0]?.url}
                   width={playlist.images[0]?.width}
@@ -88,6 +104,24 @@ const index = () => {
                 <Box className={style.text_playlist}>
                   <h1>{playlist.name}</h1>
                   <p>{playlist.description}</p>
+                  <Box marginTop="1.5rem">
+                    <Button
+                      bg="#4DC05A"
+                      color="white"
+                      onClick={(e) => selectPlaylist(e, playlist)}
+                    >
+                      <span style={{ margin: "0 5px" }}>View Tracks</span>
+                    </Button>
+                    <Button
+                      bg="red"
+                      color="white"
+                      m={{ base: "0 10px", lg: "10px 0" }}
+                      onClick={(e) => unFollowAction(e, playlist)}
+                    >
+                      <BsTrashFill />{" "}
+                      <span style={{ margin: "0 5px" }}>Unfollow</span>
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
             ))}
