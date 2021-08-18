@@ -17,7 +17,7 @@ const selectPlaylist = () => {
   const addTrack = async (id: string) => {
     await dispatch(addSelectedTrack(id));
     toast(`Add Tracks Successfully`, {
-      duration: 4000,
+      duration: 2000,
       position: "bottom-right",
       icon: "👏",
       style: { backgroundColor: "#4DC05A", color: "#fff" },
@@ -27,7 +27,7 @@ const selectPlaylist = () => {
   const removeTrack = async (id: string) => {
     await dispatch(removeSelectedTrack(id));
     toast(`Remove Tracks Successfully`, {
-      duration: 4000,
+      duration: 2000,
       position: "bottom-right",
       icon: "👏",
       style: { backgroundColor: "red", color: "#fff" },

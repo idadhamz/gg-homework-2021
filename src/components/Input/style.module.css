@@ -14,6 +14,7 @@
 
     font-size: 1.1rem;
     font-weight: normal;
+    color: black;
 }
 
 .input:focus {
@@ -21,15 +22,6 @@
     border: 2px solid #4DC05A;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #000;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: #000;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-  color: #000;
+.input::placeholder {
+  color: gray;
 }

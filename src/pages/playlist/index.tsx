@@ -12,6 +12,7 @@ import {
   Td,
 } from "@chakra-ui/react";
 import { AiFillPlayCircle } from "react-icons/ai";
+import toast, { Toaster } from "react-hot-toast";
 
 // Components
 import Image from "../../components/Image";
@@ -33,6 +34,7 @@ const index = () => {
 
   const [playlists, setPlaylists] = useState([]);
   const [playlistName, setPlaylistName] = useState("");
+  const [playlistDescription, setPlaylistDescription] = useState("");
   const [playlistTrack, setPlaylistTrack] = useState([]);
 
   useEffect(() => {
@@ -41,22 +43,23 @@ const index = () => {
     }
   }, [tokenValue]);
 
-  const selectPlaylist = (
-    e: any,
-    playlist_id: string,
-    playlist_name: string
-  ) => {
+  const selectPlaylist = (e: any, playlist: any) => {
     e.preventDefault();
-
-    if (playlist_id) {
-      getTrackPlaylist(tokenValue, playlist_id).then((data) =>
+    toast(`${playlist.name} Selected`, {
+      duration: 2000,
+      position: "bottom-right",
+      icon: "👏",
+      style: { backgroundColor: "#4DC05A", color: "#fff" },
+    });
+    if (playlist) {
+      const { id, name, description } = playlist;
+      getTrackPlaylist(tokenValue, id).then((data) =>
         setPlaylistTrack(data.items)
       );
+      setPlaylistName(name);
+      setPlaylistDescription(description);
     }
-
-    if (playlist_name) {
-      setPlaylistName(playlist_name);
-    }
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const playlistView = () => {
@@ -70,29 +73,33 @@ const index = () => {
           <Text fontSize="2rem" fontWeight="900">
             List Playlist
           </Text>
-          <div className={style.playlists}>
+          <Box className={style.playlists}>
             {playlists.map((playlist: any) => (
-              <div
+              <Box
                 key={playlist.id}
                 className={style.item_playlist}
-                onClick={(e) => selectPlaylist(e, playlist.id, playlist.name)}
+                onClick={(e) => selectPlaylist(e, playlist)}
               >
                 <Image
                   src={playlist.images[0]?.url}
                   width={playlist.images[0]?.width}
                   height={playlist.images[0]?.height}
                 />
-                <div className={style.text_playlist}>
+                <Box className={style.text_playlist}>
                   <h1>{playlist.name}</h1>
                   <p>{playlist.description}</p>
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))}
-          </div>
+          </Box>
+          <Toaster />
         </Box>
         <Box minWidth="40%">
           <Text fontSize="2rem" fontWeight="900">
             {playlistName ? playlistName : "List Tracks Playlist"}
+          </Text>
+          <Text fontSize="1.2rem" fontWeight="500">
+            {playlistDescription ? playlistDescription : ""}
           </Text>
           <Table
             variant="striped"
@@ -102,21 +109,23 @@ const index = () => {
           >
             <Thead>
               <Tr>
-                <Th>#</Th>
-                <Th>TITLE</Th>
-                <Th>ALBUM</Th>
-                <Th>DURATION</Th>
-                <Th>PLAY</Th>
+                <Th fontSize="1rem">#</Th>
+                <Th fontSize="1rem">TITLE</Th>
+                <Th fontSize="1rem">ALBUM</Th>
+                <Th fontSize="1rem">DURATION</Th>
+                <Th fontSize="1rem">PLAY</Th>
               </Tr>
             </Thead>
             <Tbody>
               {playlistTrack.length > 0 ? (
                 playlistTrack.map((item: any, idx: number) => (
                   <Tr key={item.track.id}>
-                    <Td>{idx + 1}</Td>
-                    <Td>{item.track.name}</Td>
-                    <Td>{item.track.album.name}</Td>
-                    <Td>{convertMsToMinutes(item.track.duration_ms)}</Td>
+                    <Td fontSize="1rem">{idx + 1}</Td>
+                    <Td fontSize="1rem">{item.track.name}</Td>
+                    <Td fontSize="1rem">{item.track.album.name}</Td>
+                    <Td fontSize="1rem">
+                      {convertMsToMinutes(item.track.duration_ms)}
+                    </Td>
                     <Td>
                       <a
                         href={item.track.external_urls.spotify}

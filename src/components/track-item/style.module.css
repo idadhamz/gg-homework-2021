@@ -8,11 +8,6 @@
     border-radius: 10px;
 }
 
-.playlist:hover {
-    background-color: #eee;
-    transition: all .15s ease;
-}
-
 .playlist img {
     width: 100px;
     height: 100%;
@@ -31,7 +26,7 @@
 /* desktop */
 @media screen and (min-width: 900px){
     .playlist img {
-        width: 150px;
+        width: 130px;
     }
 
     .content_playlist {

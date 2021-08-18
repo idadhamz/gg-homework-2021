@@ -3,9 +3,9 @@ import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 
 type Props = {
-  title?: string,
-  artists?: string,
-}
+  title?: string;
+  artists?: string;
+};
 
 const index = ({ title = "-", artists = "-" }: Props) => {
   return (

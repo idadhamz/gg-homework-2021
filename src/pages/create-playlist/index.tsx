@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
-import { Flex, Box, Text } from "@chakra-ui/react";
+import { Flex, Box, Text, ControlBox } from "@chakra-ui/react";
 import toast, { Toaster } from "react-hot-toast";
 
 // Components
@@ -45,7 +45,7 @@ const index = () => {
   console.log(selectedTracks);
 
   useEffect(() => {
-    getSearchTrack(tokenValue, "Love").then((data) =>
+    getSearchTrack(tokenValue, "Justin").then((data) =>
       setTrack(data.tracks.items)
     );
     getUserProfile(tokenValue).then((data) => dispatch(setUser(data)));
@@ -82,8 +82,8 @@ const index = () => {
         )
       );
 
-      toast(`Create Playlist "${formPlaylist.title}" Successfully`, {
-        duration: 4000,
+      toast(`Create Playlist ${formPlaylist.title} Successfully`, {
+        duration: 2000,
         position: "bottom-right",
         icon: "👏",
         style: { backgroundColor: "#4DC05A", color: "#fff" },
@@ -94,48 +94,49 @@ const index = () => {
   };
 
   return (
-    <Flex
-      direction={{ base: "column", lg: "row" }}
-      justify="space-between"
-      gridGap="2rem"
-      p={{ base: "0 2rem", lg: "0 8rem" }}
-    >
-      <Box>
-        <div className={style.div_search}>
-          <Text fontSize="2rem" fontWeight="900">
-            List Track
-          </Text>
+    <Box p={{ base: "0 2rem", lg: "0 8rem" }}>
+      <Flex
+        direction={{ base: "column", lg: "row" }}
+        justify="space-between"
+        gridGap="2rem"
+      >
+        <Box width="100%" height="auto">
+          <Box className={style.div_search}>
+            <Text fontSize="2rem" fontWeight="900">
+              List Track
+            </Text>
 
-          <TrackSearch
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            input={input}
-          />
-        </div>
-
-        <div className={style.track_playlist}>
-          {track.map((item: any) => (
-            <TrackItem
-              data={item}
-              key={item.id}
-              handleSelect={handleSelect}
-              isSelected={checkSelected(item.uri)}
+            <TrackSearch
+              handleSubmit={handleSubmit}
+              handleChange={handleChange}
+              input={input}
             />
-          ))}
-          <Toaster />
-        </div>
-      </Box>
-      <Box p={{ base: "2rem 0", lg: "0 1.5rem" }}>
-        <Text fontSize="2rem" fontWeight="900" p="2rem 0">
-          Playlist Form
-        </Text>
-        <PlaylistForm
-          handleSubmitForm={handleSubmitForm}
-          handleChangeForm={handleChangeForm}
-          formPlaylist={formPlaylist}
-        />
-      </Box>
-    </Flex>
+          </Box>
+
+          <Box className={style.track_playlist}>
+            {track.map((item: any) => (
+              <TrackItem
+                data={item}
+                key={item.id}
+                handleSelect={handleSelect}
+                isSelected={checkSelected(item.uri)}
+              />
+            ))}
+            <Toaster />
+          </Box>
+        </Box>
+        <Box p={{ base: "2rem 0", lg: "0 1.5rem" }}>
+          <Text fontSize="2rem" fontWeight="900" p="2rem 0">
+            Playlist Form
+          </Text>
+          <PlaylistForm
+            handleSubmitForm={handleSubmitForm}
+            handleChangeForm={handleChangeForm}
+            formPlaylist={formPlaylist}
+          />
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

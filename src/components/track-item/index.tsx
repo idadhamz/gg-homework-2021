@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./style.module.css";
+import { Box } from "@chakra-ui/react";
 
 // Components
 import PlaylistText from "../playlist-text";
@@ -7,11 +8,11 @@ import Button from "../Button";
 import Image from "../Image";
 
 type Props = {
-  data?: any,
-  handleSelect?: any,
-  isSelected?: boolean,
-  playlistId?: string|undefined
-}
+  data?: any;
+  handleSelect?: any;
+  isSelected?: boolean;
+  playlistId?: string | undefined;
+};
 
 const index = ({ data, handleSelect, isSelected }: Props) => {
   const buttonLink = (e: any, uri: string) => {
@@ -20,14 +21,22 @@ const index = ({ data, handleSelect, isSelected }: Props) => {
   };
 
   return (
-    <div className={style.playlist}>
+    <Box
+      className={style.playlist}
+      _hover={{
+        backgroundColor: "#eee",
+        color: "#000",
+        transition: "all .25s ease",
+        transform: "scale(1.05)",
+      }}
+    >
       <Image
         src={data.album.images[0].url}
         alt={data.album.name}
         width={data.album.images[0].width}
         height={data.album.images[0].height}
       />
-      <div className={style.content_playlist}>
+      <Box className={style.content_playlist}>
         <PlaylistText
           title={data.album.name}
           artists={data.album.artists[0].name}
@@ -41,8 +50,8 @@ const index = ({ data, handleSelect, isSelected }: Props) => {
         >
           {isSelected ? `Deselect` : `Select`}
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

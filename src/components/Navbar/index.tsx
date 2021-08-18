@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./style.module.css";
 import { Link, useHistory } from "react-router-dom";
+import { Box, Flex } from "@chakra-ui/react";
 
 // Assets
 import SpotifyIcon from "../../assets/img/spotify.png";
@@ -34,11 +35,11 @@ const index = () => {
   };
 
   return (
-    <div className={style.div_navbar}>
+    <Box className={style.div_navbar}>
       <Link to="/create-playlist">
         <Image src={SpotifyIcon} />
       </Link>
-      <div className={style.div_button}>
+      <Box className={style.div_item_navbar}>
         <Button onClick={toggleColorMode} type="button">
           Toggle {colorMode === "light" ? "Dark" : "Light"}
         </Button>
@@ -51,7 +52,22 @@ const index = () => {
             </Link>
             <Link to="/playlist">
               <Button bg="#00A512" color="#fff">
-                {userValue?.display_name} Playlists
+                <Flex
+                  dir="row"
+                  gridGap="1rem"
+                  justifyContent="center"
+                  alignItems="center"
+                  p="0 1.5rem"
+                >
+                  <Image
+                    src={userValue?.images[0].url}
+                    style={{
+                      width: "30px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                  {userValue?.display_name} Playlists
+                </Flex>
               </Button>
             </Link>
             <Button onClick={(e) => logoutAction(e)} bg="red" color="#fff">
@@ -63,8 +79,8 @@ const index = () => {
             Login On Spotify
           </Button>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
