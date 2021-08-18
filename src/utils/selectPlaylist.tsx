@@ -1,4 +1,4 @@
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
