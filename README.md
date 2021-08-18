@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+<h1>Spotify Web App Clone 👋</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Apa deskripsi dari Spotify Web App Clone ini? 🤔
+Website ini adalah website yang menyerupai fungsi dari platform layanan musik digital **SPOTIFY** dimana pengguna dapat menggunakan website ini untuk menghasilkan playlist musik sendiri. Playlist nya bisa disesuaikan dengan keinginan kalian sesuai dengan preferensi kegiatan yang dilakukan untuk meningkatkan mood dan perasaan senang ketika belajar, bekerja dan lainnya.
 
-## Available Scripts
+Ini adalah **Hasil Web App** dari proses perjalanan belajar saya di kegiatan **Generasi Gigih 2021** yang diselenggarakan oleh **Gojek dan Yayasan Anak Bangsa Bisa (YABB)** dan bersyukur
+banget bisa mengikuti dan berpartisipasi secara maksimal di kelas teknikal, kelas bahasa inggris dan kelas soft skill (Melalui Seminar XL Future Leader)
 
-In the project directory, you can run:
+<!-- ![Semantic description of image](https://miro.medium.com/max/1050/0*hIgH_enfC0ECOZ0B.png) <center>*Moment in Technical Session*</center> -->
 
-### `yarn start`
+Terima kasih banyak atas kesempatan kegiatannya, awesome experience for me **Gojek dan Yayasan Anak Bangsa Bisa (YABB)** 🙏🥰
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Apa saja spesifikasi teknologi pada Spotify Web App Clone ini? 🤔
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya. Berikut daftar detailnya yaa ⬇️
 
-### `yarn test`
+- **React JS** version `17.0.2` untuk membangun Web App ini
+- **React Redux** version `7.2.4` library untuk pengelolaan data dan implementasi dari **global state**
+- **React Router DOM** version `5.2.0` library untuk pengelolaan routing dan perpindahan page pada Web App
+- **Axios** version `0.21.1` library untuk Promise-based HTTP client pada JavaScript ketika melakukan pemanggilan Endpoint API
+- **Chakra UI React** version `1.6.5` UI Component Library untuk mempercepat dan mempersingkat proses development tampilan interface pada Web App
+- **Typescript** version `4.3.5` library typed superset of JavaScript yang dapat dicompiles pada plain JavaScript untuk memperbaiki struktur, keamanan serta maintainable dari kode aplikasi yang kita buat
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Problem yang dirasakan saat pengembangan Web App ini? 🤔
 
-### `yarn build`
+1. Sisi Teknikal
+    1. Keterbatasan pengetahuan fundamental pada Javascript dan implementasi dari Typescript
+    2. Pengalaman pertama membangun Web App dari scratch dan menggunakan API Public dari **SPOTIFY**
+    3. Pengetahuan Typescript yang masih sangat terbatas jadi harus tambah semangat untuk mempelajarinya
+2. Sisi Implementasi React JS
+    1. Analisa struktur folder dan kode yang efisien dan tepat
+    2. Penulisan (naming) variable, components dan function yang baik dan harus konsisten untuk memudahkan pengembangannya
+    3. Fitur yang diberikan sangat challanging dan membutuhkan analisa yang baik dari implementasi UInya, proses perpindahan datanya dan components mana yang harus reusable
+    4. Kesulitan ketika memulai implementasi **Typescript** karena banyak hal baru yang baru saya ketahui dan belum tahu implementasi yang baik dan tepat untuk studi kasus kode yang saya bangun
+    5. Kesulitan melakukan testing dari sisi front end menggunakan React Testing Library, Mock API dan JEST. Karena kita harus membuat suatu  test case dan menyerupai kondisi asli dari web app yang dibangun dalam file Testnya.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## List Features pada Web App ini? 🤔
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Main Features
+- Fitur **Login** menggunakan akun Spotify sendiri yang mengasilkan *Access Token*
+- Fitur **Mencari Track Song** dengan menuliskan kata atau kalimat yang berhubungan dengan Track Song tersebut
+- Fitur **Select** dan **Deselect** Track Song sesuai dengan Preferensi Track yang kita inginkan.
+- Fitur **Membuat Playlist dari Track yang telah dipilih sebelumnya**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Additional Features
+- Fitur **melihat daftar Playlist** dari pengguna yang telah dibuat sebelumnya
+- Fitur **melihat daftar Track Song dari Playlist** pengguna yang ingin dilihat, seperti data:
+    - Judul
+    - Album
+    - Durasi Lagu
+    - Button Play lagu ➡️ yang dapat langsung mengakses Track lagu yang ingin dimainkan pada aplikasi Spotify nya langsung
+- Fitur menampilkan data pengguna yaitu **Nama dan Foto Profil Pengguna**
 
-### `yarn eject`
+## How To Run Web App ini? 🤔
+1. Pertama kalian bisa melakukan cloning Web App ini menggunakan URL berikut `https://github.com/idadhamz/generasi-gigih-homework.git`
+2. Mengakses kode Web App di Visual Studio Code dan membuka Terminal (Command Prompt)
+3. Lakukan installasi modules (akan muncul folder `node_modules`) yang digunakan pada Web App ini dengan menjalankan `NPM INSTALL` atau `YARN ADD`
+4. Setelah melakukan installasi, buat file dengan nama `.env.local` sebagai lokasi environment SPOTIFY API ID dan KEY dan isi sesuai dengan SPOTIFY API ID dan KEY akun DEVELOPER API SPOTIFY pengguna anda
+5. Jalankan Web App pada server LOCAL dengan menjalankan `NPM RUN START` atau `YARN START` dan tunggu hingga proses running di server local berhasil. Kemudian akses `localhost:3000` atau port lain sesuai dengan hasil runningnya.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+dan taraa Web App berhasil dijalankan pada server local hingga tampil seperti contoh dibawah ini ⬇️
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Semantic description of image](https://i.ibb.co/NnLHc4g/SS-Spotify-Clone.png) <center>*Hasil Web App Spotify Clone*</center>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## The Last, Conclusion 🥰
+Web App Spotify Clone ini masih terus dilakukan pengembangan dan tambahan tentang penulisan kode yang baik dan efektif juga penambahan fitur yang lebih lengkap dan kompleks. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Terbuka untuk pengembangan Open Source juga jika kalian ⬇️ 
+- menemukan error, 
+- bug atau 
+- refactor code yang lebih baik
+- Atau ada tambahan feature yang kalian inginkan
 
-## Learn More
+Contact saya melalui 🌐 [Personal Website]("http://idadilham.site/") atau email workwithdadi@gmail.com
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Dadi Ilham, August 2021**
