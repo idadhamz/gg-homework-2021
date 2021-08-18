@@ -13,7 +13,7 @@ import getAccessToken from "../../utils/getAccessToken";
 import authSpotify from "../../services/authSpotify";
 
 // Redux
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { setAuth } from "../../redux/slices/authSlice";
 
 const index = () => {

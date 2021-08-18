@@ -13,7 +13,7 @@ import Button from "../Button";
 import authSpotify from "../../services/authSpotify";
 
 // Redux
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setAuth, isLoggedIn, user } from "../../redux/slices/authSlice";
 
 import { useColorMode } from "@chakra-ui/react";
@@ -22,11 +22,11 @@ const index = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const isLoggedInValue = useAppSelector(isLoggedIn);
-  const userValue = useAppSelector(user)
+  const userValue = useAppSelector(user);
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const logoutAction = (e:any) => {
+  const logoutAction = (e: any) => {
     e.preventDefault();
 
     dispatch(setAuth({ token: null, isLoggedIn: false }));
@@ -36,9 +36,7 @@ const index = () => {
   return (
     <div className={style.div_navbar}>
       <Link to="/create-playlist">
-        <Image
-          src={SpotifyIcon}
-        />
+        <Image src={SpotifyIcon} />
       </Link>
       <div className={style.div_button}>
         <Button onClick={toggleColorMode} type="button">
@@ -53,7 +51,7 @@ const index = () => {
             </Link>
             <Link to="/playlist">
               <Button bg="#00A512" color="#fff">
-                {userValue.display_name} Playlists
+                {userValue?.display_name} Playlists
               </Button>
             </Link>
             <Button onClick={(e) => logoutAction(e)} bg="red" color="#fff">

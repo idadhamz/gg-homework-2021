@@ -6,10 +6,10 @@ import Input from "../Input";
 import Button from "../Button";
 
 type Props = {
-  handleSubmitForm: React.FormEventHandler<HTMLFormElement>,
-  handleChangeForm: React.ChangeEventHandler<HTMLInputElement>,
-  formPlaylist: { title: string; desc: string }
-}
+  handleSubmitForm: React.FormEventHandler<HTMLFormElement>;
+  handleChangeForm: React.ChangeEventHandler<HTMLInputElement>;
+  formPlaylist: { title: string; description: string };
+};
 
 const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }: Props) => {
   return (
@@ -26,11 +26,11 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }: Props) => {
         required
       />
       <Input
-        id="desc"
+        id="description"
         type="text"
-        name="desc"
+        name="description"
         onChange={handleChangeForm}
-        value={formPlaylist.desc}
+        value={formPlaylist.description}
         placeholder="Input Description"
         autoComplete="off"
         minLength="20"

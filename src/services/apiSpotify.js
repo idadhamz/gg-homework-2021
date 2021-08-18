@@ -49,7 +49,7 @@ const createNewPlaylist = async (token, userId, newPlaylist) => {
     },
     body: JSON.stringify({
       name: newPlaylist.title,
-      description: newPlaylist.desc,
+      description: newPlaylist.description,
       public: false,
       collaborative: false,
     }),

@@ -17,7 +17,7 @@ import Playlist from "./pages/playlist";
 import Navbar from "./components/Navbar";
 
 // Redux
-import { useAppSelector } from "./hooks";
+import { useAppSelector } from "./redux/hooks";
 import { isLoggedIn } from "./redux/slices/authSlice";
 
 const App = () => {
@@ -27,8 +27,8 @@ const App = () => {
       <ChakraProvider>
         <div className="App">
           <Navbar />
-          <Switch>
-            <div className="Main">
+          <div className="Main">
+            <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
@@ -38,8 +38,8 @@ const App = () => {
               <Route exact path="/playlist">
                 {isLoggedInValue ? <Playlist /> : <Redirect to="/" />}
               </Route>
-            </div>
-          </Switch>
+            </Switch>
+          </div>
         </div>
       </ChakraProvider>
     </Router>

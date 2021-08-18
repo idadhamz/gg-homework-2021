@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
-import { useSelector, useDispatch } from "react-redux";
 import { Flex, Box, Text } from "@chakra-ui/react";
+import toast, { Toaster } from "react-hot-toast";
 
 // Components
 import TrackSearch from "../../components/track-search";
@@ -12,8 +12,16 @@ import PlaylistForm from "../../components/playlist-form";
 import { selectPlaylist } from "../../utils/selectPlaylist";
 
 // Slices
-import { setNullSelectedTrack } from "../../redux/slices/trackSlice";
-import { setUser } from "../../redux/slices/authSlice";
+import {
+  form,
+  clearSelectedTrack,
+  setForm,
+  clearForm,
+} from "../../redux/slices/playlistSlice";
+import { token, user, setUser } from "../../redux/slices/authSlice";
+
+// Redux
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 // Services
 import {
@@ -24,60 +32,64 @@ import {
 } from "../../services/apiSpotify";
 
 const index = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user);
+  const tokenValue = useAppSelector(token);
+  const userValue = useAppSelector(user);
 
   const [track, setTrack] = useState([]);
   const [input, setInput] = useState("");
-  const [formPlaylist, setFormPlaylist] = useState({
-    title: "",
-    desc: "",
-  });
+  const formPlaylist = useAppSelector(form);
 
   const { selectedTracks, checkSelected, handleSelect } = selectPlaylist();
   console.log(selectedTracks);
 
   useEffect(() => {
-    getSearchTrack(token, "Love").then((data) => setTrack(data.tracks.items));
-    getUserProfile(token).then((data) => dispatch(setUser(data)));
-  }, [token]);
+    getSearchTrack(tokenValue, "Love").then((data) =>
+      setTrack(data.tracks.items)
+    );
+    getUserProfile(tokenValue).then((data) => dispatch(setUser(data)));
+  }, [tokenValue]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (input !== "") {
-      getSearchTrack(token, input).then((data) => setTrack(data.tracks.items));
+      getSearchTrack(tokenValue, input).then((data) =>
+        setTrack(data.tracks.items)
+      );
     } else {
       setTrack([]);
     }
   };
 
-  const handleChangeForm = (e) => {
+  const handleChangeForm = (e: any) => {
     const { name, value } = e.target;
-    setFormPlaylist({ ...formPlaylist, [name]: value });
+    dispatch(setForm({ ...formPlaylist, [name]: value }));
   };
 
-  console.log(user);
-
-  const handleSubmitForm = async (e) => {
+  const handleSubmitForm = async (e: any) => {
     e.preventDefault();
 
     if (selectedTracks.length > 0) {
-      const userId = user.id;
-      createNewPlaylist(token, userId, formPlaylist).then((newPlaylist) =>
-        addTrackToPlaylist(token, newPlaylist.id, selectedTracks).then((data) =>
-          console.log(data)
+      const userId = userValue?.id;
+      createNewPlaylist(tokenValue, userId, formPlaylist).then((newPlaylist) =>
+        addTrackToPlaylist(tokenValue, newPlaylist.id, selectedTracks).then(
+          (data) => console.log(data)
         )
       );
 
-      alert(`Create Playlist "${formPlaylist.title}" Successfully`);
-      setFormPlaylist({ title: "", desc: "" });
-      dispatch(setNullSelectedTrack());
+      toast(`Create Playlist "${formPlaylist.title}" Successfully`, {
+        duration: 4000,
+        position: "bottom-right",
+        icon: "👏",
+        style: { backgroundColor: "#4DC05A", color: "#fff" },
+      });
+      dispatch(clearSelectedTrack());
+      dispatch(clearForm());
     }
   };
 
@@ -102,18 +114,18 @@ const index = () => {
         </div>
 
         <div className={style.track_playlist}>
-          {track.map((item, idx) => (
+          {track.map((item: any) => (
             <TrackItem
               data={item}
               key={item.id}
-              idx={idx}
               handleSelect={handleSelect}
               isSelected={checkSelected(item.uri)}
             />
           ))}
+          <Toaster />
         </div>
       </Box>
-      <Box p={{ base: "0", lg: "0 1.5rem" }}>
+      <Box p={{ base: "2rem 0", lg: "0 1.5rem" }}>
         <Text fontSize="2rem" fontWeight="900" p="2rem 0">
           Playlist Form
         </Text>
