@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
-import { Flex, Box, Text, ControlBox } from "@chakra-ui/react";
+import { Flex, Box, Text } from "@chakra-ui/react";
 import toast, { Toaster } from "react-hot-toast";
 
 // Components
