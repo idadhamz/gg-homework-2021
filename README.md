@@ -58,12 +58,12 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
 2. Mengakses kode Web App di Visual Studio Code dan membuka Terminal (Command Prompt)
 3. Lakukan installasi modules (akan muncul folder `node_modules`) yang digunakan pada Web App ini dengan menjalankan `NPM INSTALL` atau `YARN ADD`
 4. Setelah melakukan installasi, buat file dengan nama `.env.local` sebagai lokasi environment SPOTIFY API ID dan KEY dan isi sesuai dengan SPOTIFY API ID dan KEY akun DEVELOPER API SPOTIFY pengguna anda
-5. Setting **REDIRECT_URL** di file **authSpotify.tsx** menggantikan isinya dengan localhost anda atau contohnya yaitu `localhost:3000`
+5. Setting **REDIRECT_URL** di file **authSpotify.js** menggantikan isinya dengan localhost anda atau contohnya yaitu `localhost:3000`
 6. Jalankan Web App pada server LOCAL dengan menjalankan `NPM RUN START` atau `YARN START` dan tunggu hingga proses running di server local berhasil. Kemudian akses `localhost:3000` atau port lain sesuai dengan hasil runningnya.
 
 dan taraa Web App berhasil dijalankan pada server local hingga tampil seperti contoh dibawah ini ⬇️
 
-![Semantic description of image](https://i.ibb.co/NnLHc4g/SS-Spotify-Clone.png) <center>***Hasil Web App Spotify Clone***</center>
+![Semantic description of image](https://i.ibb.co/NnLHc4g/SS-Spotify-Clone.png) <center>***Hasil Web App Spotify Clone***</center> [Link Website](https://spotify-idadilham.vercel.app/)
 
 ## The Last, Conclusion 🥰
 Web App Spotify Clone ini masih terus dilakukan pengembangan dan tambahan tentang penulisan kode yang baik dan efektif juga penambahan fitur yang lebih lengkap dan kompleks. 
@@ -73,4 +73,13 @@ Terbuka untuk pengembangan Open Source juga jika kalian ⬇️
 - Refactor code dengan menerapkan Clean Code yang lebih baik
 - Atau ingin adanya tambahan feature yang kalian perlukan
 
-Pertanyaan lebih lanjut terkait project Web App ini atau hal lain dapat contact saya melalui 🌐 [Personal Website](http://idadilham.site/)atau email workwithdadi@gmail.com ya 🙌🙏
+Pertanyaan lebih lanjut terkait project Web App ini atau hal lain dapat contact saya melalui 
+🌐 [Personal Website](http://idadilham.site/) ya 🙌🙏
+
+## Feedback
+
+Any feedback is welcome, you can sumbit issues/feedback [here](https://github.com/idadhamz/generasi-gigih-homework/issues).
+
+## License
+
+Licensed under [MIT License, Copyright (c) 2021 Dadi Ilham S](./LICENSE)
