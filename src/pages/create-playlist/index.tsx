@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import TrackSearch from "../../components/track-search";
 import TrackItem from "../../components/track-item";
 import PlaylistForm from "../../components/playlist-form";
+import Pagination from "../../components/Pagination";
 
 // Utils
 import { selectPlaylist } from "../../utils/selectPlaylist";
@@ -43,7 +44,9 @@ const index = () => {
   const [input, setInput] = useState("");
   const formPlaylist = useAppSelector(form);
 
-  const { selectedTracks, checkSelected, handleSelect } = selectPlaylist();
+  const { selectedTracks } = selectPlaylist();
+
+  console.log(selectedTracks);
 
   useEffect(() => {
     getSearchTrack(tokenValue, "Justin").then((data) =>
@@ -114,7 +117,7 @@ const index = () => {
             />
           </Box>
 
-          <Box
+          {/* <Box
             className={
               track.length > 0
                 ? style.track_playlist
@@ -146,7 +149,14 @@ const index = () => {
               </Flex>
             )}
             <Toaster />
-          </Box>
+          </Box> */}
+
+          <Pagination
+            data={track}
+            RenderComponent={TrackItem}
+            pageLimit={track.length / 10}
+            dataLimit={10}
+          />
         </Box>
         <Box p={{ base: "2rem 0", lg: "0 1.5rem" }}>
           <Text fontSize="2rem" fontWeight="900" p="2rem 0">

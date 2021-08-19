@@ -35,7 +35,7 @@ const getSearchTrack = async (tokenValue, input) => {
     },
   };
   return await fetch(
-    `${API_SPOTIFY}/search?q=${input}&type=track&limit=10`,
+    `${API_SPOTIFY}/search?q=${input}&type=track&limit=30`,
     reqOptions
   ).then((res) => res.json());
 };

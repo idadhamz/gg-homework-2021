@@ -1,0 +1,59 @@
+/* mobile */
+.track_playlist {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+.track_playlist_null {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.div_pagination {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+
+    margin: 2rem 0;
+}
+
+.div_pagination button {
+    border: 1.5px solid #00A512;
+    color: #000;
+}
+
+.div_pagination button.prev, .div_pagination button.next {
+    width: 80px;
+    height: 40px;
+}
+
+.div_pagination button.prev.disabled {
+    background-color: #00A512;
+}
+
+.div_pagination button.paginationItem {
+    width: fit-content;
+    height: auto;
+}
+
+.div_pagination button.paginationItem_active {
+    background-color: #00A512;
+    color: #fff;
+}
+
+/* desktop */
+@media screen and (min-width: 900px){
+    .track_playlist {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        margin: 2rem 0;
+    }
+    .track_playlist_null {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
