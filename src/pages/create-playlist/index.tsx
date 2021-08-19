@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
 import { Flex, Box, Text } from "@chakra-ui/react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useHistory } from "react-router-dom";
 
 // Components
@@ -116,40 +116,6 @@ const index = () => {
               input={input}
             />
           </Box>
-
-          {/* <Box
-            className={
-              track.length > 0
-                ? style.track_playlist
-                : style.track_playlist_null
-            }
-          >
-            {track.length > 0 ? (
-              track.map((item: any) => (
-                <TrackItem
-                  data={item}
-                  key={item.id}
-                  handleSelect={handleSelect}
-                  isSelected={checkSelected(item.uri)}
-                />
-              ))
-            ) : (
-              <Flex justifyContent="center" alignItems="center">
-                <Box
-                  width="100%"
-                  height="auto"
-                  p="2rem"
-                  border="1px solid #d9dadc"
-                  borderRadius="10px"
-                >
-                  <Text size="2rem" fontWeight="bold" textAlign="center">
-                    Track not found
-                  </Text>
-                </Box>
-              </Flex>
-            )}
-            <Toaster />
-          </Box> */}
 
           <Pagination
             data={track}
