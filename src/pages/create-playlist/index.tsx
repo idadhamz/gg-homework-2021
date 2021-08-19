@@ -116,14 +116,28 @@ const index = () => {
           </Box>
 
           <Box className={style.track_playlist}>
-            {track.map((item: any) => (
-              <TrackItem
-                data={item}
-                key={item.id}
-                handleSelect={handleSelect}
-                isSelected={checkSelected(item.uri)}
-              />
-            ))}
+            {track.length > 0 ? (
+              track.map((item: any) => (
+                <TrackItem
+                  data={item}
+                  key={item.id}
+                  handleSelect={handleSelect}
+                  isSelected={checkSelected(item.uri)}
+                />
+              ))
+            ) : (
+              <Flex justifyContent="center" alignItems="center">
+                <Box
+                  width="100%"
+                  height="auto"
+                  p="2rem"
+                  border="1px solid #d9dadc"
+                  borderRadius="10px"
+                >
+                  <Text>Track not found</Text>
+                </Box>
+              </Flex>
+            )}
             <Toaster />
           </Box>
         </Box>

@@ -20,6 +20,7 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
 - **Axios** version `0.21.1` library untuk Promise-based HTTP client pada JavaScript ketika melakukan pemanggilan Endpoint API
 - **Chakra UI React** version `1.6.5` UI Component Library untuk mempercepat dan mempersingkat proses development tampilan interface pada Web App
 - **Typescript** version `4.3.5` library typed superset of JavaScript yang dapat dicompiles pada plain JavaScript untuk memperbaiki struktur, keamanan serta maintainable dari kode aplikasi yang kita buat
+- **React Hook Form** version `7.12.2` library untuk memvalidasi masukan (input) pengguna ketika melakukan pembuatan Playlist
 
 ## Problem yang dirasakan saat pengembangan Web App ini? 🤔
 
@@ -50,6 +51,7 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
     - **Durasi Lagu**
     - **Button Play lagu** ➡️ langsung mengakses Track lagu yang ingin dimainkan pada aplikasi **SPOTIFY**
 - Fitur menampilkan data pengguna (**Nama dan Foto Profil Pengguna**)
+- Fitur Unfollow (Hapus) Playlist Pengguna
 
 ## How To Run Web App ini? 🤔
 1. Pertama kalian bisa melakukan cloning Web App ini menggunakan URL berikut `https://github.com/idadhamz/generasi-gigih-homework.git`
