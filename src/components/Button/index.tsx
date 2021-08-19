@@ -25,7 +25,6 @@ const index = ({ ...props }: Props) => {
       borderRadius="20px"
       _hover={{
         opacity: "0.7",
-        cursor: "pointer",
       }}
     >
       {props.children}

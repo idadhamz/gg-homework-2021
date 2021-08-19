@@ -39,6 +39,7 @@ const index = () => {
   const tokenValue = useAppSelector(token);
 
   const [playlists, setPlaylists] = useState([]);
+  const [playlistsId, setPlaylistsId] = useState("");
   const [playlistName, setPlaylistName] = useState("");
   const [playlistDescription, setPlaylistDescription] = useState("");
   const [playlistTrack, setPlaylistTrack] = useState([]);
@@ -54,6 +55,7 @@ const index = () => {
       getTrackPlaylist(tokenValue, id).then((data) =>
         setPlaylistTrack(data.items)
       );
+      setPlaylistsId(id);
       setPlaylistName(name);
       setPlaylistDescription(description);
     }
@@ -89,7 +91,7 @@ const index = () => {
         justify="space-between"
         gridGap="2rem"
       >
-        <Box minWidth="60%">
+        <Box>
           <Text fontSize="2rem" fontWeight="900">
             List Playlist
           </Text>
@@ -108,14 +110,20 @@ const index = () => {
                     <Button
                       bg="#4DC05A"
                       color="white"
+                      style={{ width: "100%", fontWeight: "normal" }}
                       onClick={(e) => selectPlaylist(e, playlist)}
                     >
-                      <span style={{ margin: "0 5px" }}>View Tracks</span>
+                      <span style={{ margin: "0 5px" }}>
+                        {playlist.id === playlistsId
+                          ? "Selected"
+                          : "View Tracks"}
+                      </span>
                     </Button>
                     <Button
                       bg="red"
                       color="white"
-                      m={{ base: "0 10px", lg: "10px 0" }}
+                      style={{ width: "100%", fontWeight: "normal" }}
+                      m="10px 0"
                       onClick={(e) => unFollowAction(e, playlist)}
                     >
                       <BsTrashFill />{" "}
@@ -144,8 +152,7 @@ const index = () => {
             <Thead>
               <Tr>
                 <Th fontSize="1rem">#</Th>
-                <Th fontSize="1rem">TITLE</Th>
-                <Th fontSize="1rem">ALBUM</Th>
+                <Th fontSize="1rem">TRACK</Th>
                 <Th fontSize="1rem">DURATION</Th>
                 <Th fontSize="1rem">PLAY</Th>
               </Tr>
@@ -156,10 +163,7 @@ const index = () => {
                   <Tr key={item.track.id}>
                     <Td fontSize="1rem">{idx + 1}</Td>
                     <Td fontSize="1rem">{item.track.name}</Td>
-                    <Td fontSize="1rem">{item.track.album.name}</Td>
-                    <Td fontSize="1rem">
-                      {convertMsToMinutes(item.track.duration_ms)}
-                    </Td>
+                    <Td>{convertMsToMinutes(item.track.duration_ms)}</Td>
                     <Td>
                       <a
                         href={item.track.external_urls.spotify}

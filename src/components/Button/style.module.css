@@ -1,22 +1,4 @@
-.button {
-    border: none;
-    background-color: #00A512;
-    color: white;
-
-    padding: 0.8em;
-    text-decoration: none;
-    border-radius: 2rem;
-
-    width: auto;
-    height: auto;
-    align-self: center;
-
-    box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -webkit-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-    -moz-box-shadow: 6px 10px 30px -10px rgba(214,197,199,0.64);
-}
-
-.button:hover {
+.button:hover:not([disabled]) {
     opacity: 0.7;
     cursor: pointer;
 }
