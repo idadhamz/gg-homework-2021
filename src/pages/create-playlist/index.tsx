@@ -39,19 +39,22 @@ const index = () => {
 
   const tokenValue = useAppSelector(token);
   const userValue = useAppSelector(user);
+  const formPlaylist = useAppSelector(form);
 
   const [track, setTrack] = useState([]);
   const [input, setInput] = useState("");
-  const formPlaylist = useAppSelector(form);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { selectedTracks } = selectPlaylist();
 
   console.log(selectedTracks);
 
   useEffect(() => {
-    getSearchTrack(tokenValue, "Justin").then((data) =>
-      setTrack(data.tracks.items)
-    );
+    setIsLoading(true);
+    getSearchTrack(tokenValue, "Love").then((data) => {
+      setTrack(data.tracks.items);
+      setIsLoading(false);
+    });
     getUserProfile(tokenValue).then((data) => dispatch(setUser(data)));
   }, [tokenValue]);
 
@@ -61,12 +64,17 @@ const index = () => {
 
   const handleSubmitSearch = async (e: any) => {
     e.preventDefault();
+
+    setIsLoading(true);
     if (input !== "") {
-      getSearchTrack(tokenValue, input).then((data) =>
-        setTrack(data.tracks.items)
-      );
+      getSearchTrack(tokenValue, input).then((data) => {
+        setTrack(data.tracks.items);
+        setIsLoading(false);
+      });
+      setInput("");
     } else {
       setTrack([]);
+      setIsLoading(false);
     }
   };
 
@@ -122,6 +130,7 @@ const index = () => {
             RenderComponent={TrackItem}
             pageLimit={track.length / 10}
             dataLimit={10}
+            isLoading={isLoading}
           />
         </Box>
         <Box p={{ base: "2rem 0", lg: "0 1.5rem" }}>
@@ -132,6 +141,7 @@ const index = () => {
             handleSubmitForm={handleSubmitForm}
             handleChangeForm={handleChangeForm}
             formPlaylist={formPlaylist}
+            selectedTracks={selectedTracks}
           />
         </Box>
       </Flex>

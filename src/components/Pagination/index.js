@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import style from "./style.module.css";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, Skeleton } from "@chakra-ui/react";
 import { Toaster } from "react-hot-toast";
 
 // Components
@@ -9,7 +9,7 @@ import Button from "../Button";
 // Utils
 import { selectPlaylist } from "../../utils/selectPlaylist";
 
-const index = ({ data, RenderComponent, pageLimit, dataLimit }) => {
+const index = ({ data, RenderComponent, pageLimit, dataLimit, isLoading }) => {
   const pages = Math.round(data.length / dataLimit);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -53,14 +53,24 @@ const index = ({ data, RenderComponent, pageLimit, dataLimit }) => {
         }
       >
         {getPaginatedData().length > 0 ? (
-          getPaginatedData().map((item) => (
-            <RenderComponent
-              data={item}
-              key={item.id}
-              handleSelect={handleSelect}
-              isSelected={checkSelected(item.uri)}
-            />
-          ))
+          getPaginatedData().map((item) =>
+            isLoading === true ? (
+              <Flex gridGap="1rem">
+                <Skeleton width="100%" height="165px" borderRadius="10px" />
+              </Flex>
+            ) : (
+              <RenderComponent
+                data={item}
+                key={item.id}
+                handleSelect={handleSelect}
+                isSelected={checkSelected(item.uri)}
+              />
+            )
+          )
+        ) : isLoading === true ? (
+          <Flex>
+            <Skeleton width="100%" height="68px" borderRadius="10px" />
+          </Flex>
         ) : (
           <Flex justifyContent="center" alignItems="center">
             <Box
@@ -70,47 +80,55 @@ const index = ({ data, RenderComponent, pageLimit, dataLimit }) => {
               border="1px solid #d9dadc"
               borderRadius="10px"
             >
-              <Text size="2rem" fontWeight="bold" textAlign="center">
+              <Text
+                fontSize="1.5rem"
+                fontWeight="bold"
+                textAlign="center"
+                color="#5F636C"
+              >
                 Track not found
               </Text>
             </Box>
           </Flex>
         )}
+
         <Toaster />
       </Box>
 
-      <Box className={style.div_pagination}>
-        {/* previous Button */}
-        <Button
-          onClick={goToPreviousPage}
-          disabled={currentPage === 1 ? true : false}
-        >
-          Previous
-        </Button>
-
-        {/* show page numbers */}
-        {getPaginationGroup().map((item, index) => (
+      {getPaginatedData().length > 0 && (
+        <Box className={style.div_pagination}>
+          {/* previous Button */}
           <Button
-            key={index}
-            onClick={changePage}
-            className={
-              currentPage === item
-                ? style.paginationItem_active
-                : style.paginationItem
-            }
+            onClick={goToPreviousPage}
+            disabled={currentPage === 1 ? true : false}
           >
-            <span>{item}</span>
+            Previous
           </Button>
-        ))}
 
-        {/* next Button */}
-        <Button
-          onClick={goToNextPage}
-          disabled={currentPage === pages ? true : false}
-        >
-          Next
-        </Button>
-      </Box>
+          {/* show page numbers */}
+          {getPaginationGroup().map((item, index) => (
+            <Button
+              key={index}
+              onClick={changePage}
+              className={
+                currentPage === item
+                  ? style.paginationItem_active
+                  : style.paginationItem
+              }
+            >
+              <span>{item}</span>
+            </Button>
+          ))}
+
+          {/* next Button */}
+          <Button
+            onClick={goToNextPage}
+            disabled={currentPage === pages ? true : false}
+          >
+            Next
+          </Button>
+        </Box>
+      )}
     </>
   );
 };

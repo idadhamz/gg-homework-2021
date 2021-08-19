@@ -11,9 +11,15 @@ type Props = {
   handleSubmitForm: React.FormEventHandler<HTMLFormElement>;
   handleChangeForm: React.ChangeEventHandler<HTMLInputElement>;
   formPlaylist: { title: string; description: string };
+  selectedTracks: string[];
 };
 
-const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }: Props) => {
+const index = ({
+  handleSubmitForm,
+  handleChangeForm,
+  formPlaylist,
+  selectedTracks,
+}: Props) => {
   const {
     register,
     handleSubmit,
@@ -87,7 +93,9 @@ const index = ({ handleSubmitForm, handleChangeForm, formPlaylist }: Props) => {
         bg="#00A512"
         color="#fff"
         m="1rem 0"
-        disabled={!isDirty || !isValid}
+        disabled={
+          !isDirty || !isValid || selectedTracks.length === 0 ? true : false
+        }
       >
         Submit
       </Button>
