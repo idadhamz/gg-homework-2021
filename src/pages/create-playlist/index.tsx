@@ -44,7 +44,6 @@ const index = () => {
   const formPlaylist = useAppSelector(form);
 
   const { selectedTracks, checkSelected, handleSelect } = selectPlaylist();
-  console.log(selectedTracks);
 
   useEffect(() => {
     getSearchTrack(tokenValue, "Justin").then((data) =>

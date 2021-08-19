@@ -32,8 +32,10 @@ import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 // Slices
 import { token } from "../../redux/slices/authSlice";
 import {
+  playlists,
   playlistSelected,
   playlistTracks,
+  setPlaylists,
   setPlaylistSelected,
   clearPlaylistSelected,
   setPlaylistTracks,
@@ -42,20 +44,26 @@ import {
 // Utils
 import convertMsToMinutes from "../../utils/convertMsToMinutes";
 
+type PlaylistSelectedValueProps = {
+  id: string;
+  name: string;
+  description: string;
+};
+
 const index = () => {
   const dispatch = useAppDispatch();
   const tokenValue = useAppSelector(token);
 
-  const [playlists, setPlaylists] = useState([]);
-  const playlistSelectedValue = useAppSelector(playlistSelected);
-  const playlistTracksValue = useAppSelector(playlistTracks);
+  const playlistsValue = useAppSelector<any[]>(playlists);
+  const playlistSelectedValue =
+    useAppSelector<PlaylistSelectedValueProps>(playlistSelected);
+  const playlistTracksValue = useAppSelector<any[]>(playlistTracks);
 
   useEffect(() => {
     getUserPlaylists(tokenValue).then((data) =>
-      // dispatch(setPlaylists(data.items))
-      setPlaylists(data.items)
+      dispatch(setPlaylists(data.items))
     );
-  }, [playlists]);
+  }, []);
 
   const selectPlaylist = (e: any, playlist: any) => {
     e.preventDefault();
@@ -81,6 +89,10 @@ const index = () => {
       unFollowPlaylist(tokenValue, id).then((data) => console.log(data));
       dispatch(setPlaylistTracks([]));
       dispatch(clearPlaylistSelected());
+      const updatePlaylists = playlistsValue.filter(
+        (result) => result.id !== id
+      );
+      dispatch(setPlaylists(updatePlaylists));
     }
     toast(`Unfollow Playlist ${name} Succesfully`, {
       duration: 2000,
@@ -102,7 +114,7 @@ const index = () => {
             List Playlist
           </Text>
           <Box className={style.playlists}>
-            {playlists.map((playlist: any) => (
+            {playlistsValue.map((playlist: any) => (
               <Box key={playlist.id} className={style.item_playlist}>
                 <Image
                   src={playlist.images[0]?.url}
