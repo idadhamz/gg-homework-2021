@@ -115,7 +115,13 @@ const index = () => {
             />
           </Box>
 
-          <Box className={style.track_playlist}>
+          <Box
+            className={
+              track.length > 0
+                ? style.track_playlist
+                : style.track_playlist_null
+            }
+          >
             {track.length > 0 ? (
               track.map((item: any) => (
                 <TrackItem
@@ -134,7 +140,9 @@ const index = () => {
                   border="1px solid #d9dadc"
                   borderRadius="10px"
                 >
-                  <Text>Track not found</Text>
+                  <Text size="2rem" fontWeight="bold" textAlign="center">
+                    Track not found
+                  </Text>
                 </Box>
               </Flex>
             )}

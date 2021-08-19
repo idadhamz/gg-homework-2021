@@ -8,6 +8,10 @@
     grid-template-columns: 1fr;
     gap: 2rem;
 }
+.track_playlist_null {
+    display: grid;
+    grid-template-columns: 1fr;
+}
 
 /* desktop */
 @media screen and (min-width: 900px){
@@ -23,5 +27,9 @@
         grid-template-columns: 1fr 1fr;
 
         margin: 2rem 0;
+    }
+    .track_playlist_null {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 }
