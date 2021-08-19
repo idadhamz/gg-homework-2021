@@ -53,11 +53,11 @@ const index = () => {
     getUserProfile(tokenValue).then((data) => dispatch(setUser(data)));
   }, [tokenValue]);
 
-  const handleChange = (e: any) => {
+  const handleChangeSearch = (e: any) => {
     setInput(e.target.value);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmitSearch = async (e: any) => {
     e.preventDefault();
     if (input !== "") {
       getSearchTrack(tokenValue, input).then((data) =>
@@ -73,9 +73,7 @@ const index = () => {
     dispatch(setForm({ ...formPlaylist, [name]: value }));
   };
 
-  const handleSubmitForm = async (e: any) => {
-    e.preventDefault();
-
+  const handleSubmitForm = async () => {
     if (selectedTracks.length > 0) {
       const userId = userValue?.id;
       await createNewPlaylist(tokenValue, userId, formPlaylist).then(
@@ -111,8 +109,8 @@ const index = () => {
             </Text>
 
             <TrackSearch
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
+              handleSubmitSearch={handleSubmitSearch}
+              handleChangeSearch={handleChangeSearch}
               input={input}
             />
           </Box>

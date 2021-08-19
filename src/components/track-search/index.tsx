@@ -9,19 +9,19 @@ import Input from "../Input";
 import Button from "../Button";
 
 type Props = {
-  handleSubmit: React.FormEventHandler<HTMLFormElement>;
-  handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  handleSubmitSearch: React.FormEventHandler<HTMLFormElement>;
+  handleChangeSearch: React.ChangeEventHandler<HTMLInputElement>;
   input: string;
 };
 
-const index = ({ handleSubmit, handleChange, input }: Props) => {
+const index = ({ handleSubmitSearch, handleChangeSearch, input }: Props) => {
   return (
-    <form onSubmit={handleSubmit} className={style.form}>
+    <form onSubmit={handleSubmitSearch} className={style.form}>
       <Input
         id="search"
         type="text"
         name="search"
-        onChange={handleChange}
+        onChange={handleChangeSearch}
         value={input}
         placeholder="Search Track Title"
         autoComplete="off"

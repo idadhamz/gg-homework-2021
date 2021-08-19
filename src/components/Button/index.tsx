@@ -14,6 +14,7 @@ type Props = {
   fontSize?: string;
   fontWeight?: string;
   style?: React.CSSProperties;
+  disabled?: any;
 };
 
 const index = ({ ...props }: Props) => {

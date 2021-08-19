@@ -11,6 +11,7 @@ type Props = {
   autoComplete?: string;
   minLength?: any;
   required?: boolean;
+  ref?: any;
 };
 
 const index = ({ ...props }: Props) => {
