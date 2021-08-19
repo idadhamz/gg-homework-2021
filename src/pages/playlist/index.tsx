@@ -32,10 +32,8 @@ import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 // Slices
 import { token } from "../../redux/slices/authSlice";
 import {
-  playlists,
   playlistSelected,
   playlistTracks,
-  setPlaylists,
   setPlaylistSelected,
   clearPlaylistSelected,
   setPlaylistTracks,
