@@ -27,25 +27,36 @@ import {
 } from "../../services/apiSpotify";
 
 // Redux
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 
 // Slices
 import { token } from "../../redux/slices/authSlice";
+import {
+  playlists,
+  playlistSelected,
+  playlistTracks,
+  setPlaylists,
+  setPlaylistSelected,
+  clearPlaylistSelected,
+  setPlaylistTracks,
+} from "../../redux/slices/playlistSlice";
 
 // Utils
 import convertMsToMinutes from "../../utils/convertMsToMinutes";
 
 const index = () => {
+  const dispatch = useAppDispatch();
   const tokenValue = useAppSelector(token);
 
   const [playlists, setPlaylists] = useState([]);
-  const [playlistsId, setPlaylistsId] = useState("");
-  const [playlistName, setPlaylistName] = useState("");
-  const [playlistDescription, setPlaylistDescription] = useState("");
-  const [playlistTrack, setPlaylistTrack] = useState([]);
+  const playlistSelectedValue = useAppSelector(playlistSelected);
+  const playlistTracksValue = useAppSelector(playlistTracks);
 
   useEffect(() => {
-    getUserPlaylists(tokenValue).then((data) => setPlaylists(data.items));
+    getUserPlaylists(tokenValue).then((data) =>
+      // dispatch(setPlaylists(data.items))
+      setPlaylists(data.items)
+    );
   }, [playlists]);
 
   const selectPlaylist = (e: any, playlist: any) => {
@@ -53,11 +64,9 @@ const index = () => {
     if (playlist) {
       const { id, name, description } = playlist;
       getTrackPlaylist(tokenValue, id).then((data) =>
-        setPlaylistTrack(data.items)
+        dispatch(setPlaylistTracks(data.items))
       );
-      setPlaylistsId(id);
-      setPlaylistName(name);
-      setPlaylistDescription(description);
+      dispatch(setPlaylistSelected({ id, name, description }));
     }
     toast(`${playlist.name} Selected`, {
       duration: 2000,
@@ -72,9 +81,8 @@ const index = () => {
     const { id, name } = playlist;
     if (id) {
       unFollowPlaylist(tokenValue, id).then((data) => console.log(data));
-      setPlaylistTrack([]);
-      setPlaylistName("");
-      setPlaylistDescription("");
+      dispatch(setPlaylistTracks([]));
+      dispatch(clearPlaylistSelected());
     }
     toast(`Unfollow Playlist ${name} Succesfully`, {
       duration: 2000,
@@ -114,7 +122,7 @@ const index = () => {
                       onClick={(e) => selectPlaylist(e, playlist)}
                     >
                       <span style={{ margin: "0 5px" }}>
-                        {playlist.id === playlistsId
+                        {playlist.id === playlistSelectedValue.id
                           ? "Selected"
                           : "View Tracks"}
                       </span>
@@ -138,10 +146,14 @@ const index = () => {
         </Box>
         <Box minWidth="40%">
           <Text fontSize="2rem" fontWeight="900">
-            {playlistName ? playlistName : "List Tracks Playlist"}
+            {playlistSelectedValue.name
+              ? playlistSelectedValue.name
+              : "List Tracks Playlist"}
           </Text>
           <Text fontSize="1.2rem" fontWeight="500">
-            {playlistDescription ? playlistDescription : ""}
+            {playlistSelectedValue.description
+              ? playlistSelectedValue.description
+              : ""}
           </Text>
           <Table
             variant="striped"
@@ -158,8 +170,8 @@ const index = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {playlistTrack.length > 0 ? (
-                playlistTrack.map((item: any, idx: number) => (
+              {playlistTracksValue.length > 0 ? (
+                playlistTracksValue.map((item: any, idx: number) => (
                   <Tr key={item.track.id}>
                     <Td fontSize="1rem">{idx + 1}</Td>
                     <Td fontSize="1rem">{item.track.name}</Td>

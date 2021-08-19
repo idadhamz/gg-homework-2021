@@ -15,6 +15,7 @@ import Playlist from "./pages/playlist";
 
 // Components
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 // Redux
 import { useAppSelector } from "./redux/hooks";
@@ -40,6 +41,7 @@ const App = () => {
               </Route>
             </Switch>
           </div>
+          <Footer />
         </div>
       </ChakraProvider>
     </Router>

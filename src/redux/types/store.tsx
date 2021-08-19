@@ -7,6 +7,13 @@ export interface AuthState {
 }
 
 export interface PlaylistState {
+  playlists: [];
+  playlistSelected: {
+    id: string;
+    name: string;
+    description: string;
+  };
+  playlistTracks: [];
   selectedTrack: string[];
   form: {
     title: string;

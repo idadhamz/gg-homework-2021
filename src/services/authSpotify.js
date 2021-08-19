@@ -2,7 +2,7 @@ const authSpotify = (e) => {
   e.preventDefault();
 
   const AUTHORIZE = "https://accounts.spotify.com/authorize";
-  const REDIRECT_URL = "https://spotify-idadilham.vercel.app/";
+  const REDIRECT_URL = "http://localhost:3000/";
   const SCOPE =
     "user-read-private playlist-read-private playlist-modify-private user-read-email";
 
