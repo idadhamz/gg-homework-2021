@@ -27,7 +27,7 @@ const App = () => {
     <Router>
       <ChakraProvider>
         <div className="App">
-          <Navbar />
+          <Navbar isLoggedInValue={isLoggedInValue} />
           <div className="Main">
             <Switch>
               <Route exact path="/">

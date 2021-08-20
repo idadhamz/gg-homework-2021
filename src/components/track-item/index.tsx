@@ -47,6 +47,7 @@ const index = ({ data, handleSelect, isSelected }: Props) => {
             backgroundColor: isSelected ? "red" : "#00A512",
           }}
           color="#fff"
+          role="button"
         >
           {isSelected ? `Deselect` : `Select`}
         </Button>

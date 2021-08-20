@@ -25,8 +25,15 @@ const index = ({ handleSubmitSearch, handleChangeSearch, input }: Props) => {
         value={input}
         placeholder="Search Track Title"
         autoComplete="off"
+        role="input"
       />
-      <Button type="submit" bg="#00A512" color="#fff" margin="1rem 0">
+      <Button
+        type="submit"
+        bg="#00A512"
+        color="#fff"
+        margin="1rem 0"
+        role="button"
+      >
         Search{" "}
         <span style={{ margin: "0 5px" }}>
           <BiSearchAlt style={{ fontSize: "20px" }} />

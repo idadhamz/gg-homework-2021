@@ -12,6 +12,7 @@ type Props = {
   minLength?: any;
   required?: boolean;
   ref?: any;
+  role?: string;
 };
 
 const index = ({ ...props }: Props) => {

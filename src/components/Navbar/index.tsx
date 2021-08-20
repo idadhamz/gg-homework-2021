@@ -15,14 +15,17 @@ import authSpotify from "../../services/authSpotify";
 
 // Redux
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setAuth, isLoggedIn, user } from "../../redux/slices/authSlice";
+import { setAuth, user } from "../../redux/slices/authSlice";
 
 import { useColorMode } from "@chakra-ui/react";
 
-const index = () => {
+type Props = {
+  isLoggedInValue: boolean;
+};
+
+const index = ({ isLoggedInValue }: Props) => {
   const history = useHistory();
   const dispatch = useAppDispatch();
-  const isLoggedInValue = useAppSelector(isLoggedIn);
   const userValue = useAppSelector(user);
 
   const { colorMode, toggleColorMode } = useColorMode();
@@ -34,10 +37,12 @@ const index = () => {
     history.push("/");
   };
 
+  console.log(userValue?.images[0].url);
+
   return (
     <Box className={style.div_navbar}>
       <Link to="/create-playlist">
-        <Image src={SpotifyIcon} />
+        <Image src={SpotifyIcon} data-testid="logoImg" />
       </Link>
       <Box className={style.div_item_navbar}>
         <Button onClick={toggleColorMode} type="button">
@@ -65,6 +70,7 @@ const index = () => {
                       width: "30px",
                       borderRadius: "50%",
                     }}
+                    data-testid="userImg"
                   />
                   {userValue?.display_name} Playlists
                 </Flex>

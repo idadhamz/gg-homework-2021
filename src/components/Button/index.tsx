@@ -15,6 +15,7 @@ type Props = {
   fontWeight?: string;
   style?: React.CSSProperties;
   disabled?: any;
+  role?: string;
 };
 
 const index = ({ ...props }: Props) => {
