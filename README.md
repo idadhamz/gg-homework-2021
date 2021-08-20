@@ -38,7 +38,7 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
 ## List Features pada Web App ini? 🤔
 
 ### Main Features
-- Fitur **Login** menggunakan akun Spotify sendiri yang mengasilkan *Access Token*
+- Fitur **Login** menggunakan akun Spotify sendiri yang akan menghasilkan **Kode Akses**
 - Fitur **Mencari Track Song** dengan menuliskan kata atau kalimat yang berhubungan dengan Track Song tersebut
 - Fitur **Select** dan **Deselect** Track Song sesuai dengan Preferensi Track yang kita inginkan.
 - Fitur **Membuat Playlist dari Track yang telah dipilih sebelumnya**
@@ -62,7 +62,7 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
 
 dan taraa Web App berhasil dijalankan pada server local hingga tampil seperti contoh dibawah ini ⬇️
 
-![Semantic description of image](https://i.ibb.co/NnLHc4g/SS-Spotify-Clone.png) <center>***Hasil Web App Spotify Clone***</center> [Link Website](https://spotify-idadilham.vercel.app/)
+![Semantic description of image](https://i.ibb.co/VYSTX7m/SS-Spotify-Clone.png) <center>***Hasil Web App Spotify Clone***</center> [Link Website](https://spotify-idadilham.vercel.app/)
 
 ## The Last, Conclusion 🥰
 Web App Spotify Clone ini masih terus dilakukan pengembangan dan tambahan tentang penulisan kode yang baik dan efektif juga penambahan fitur yang lebih lengkap dan kompleks. 
