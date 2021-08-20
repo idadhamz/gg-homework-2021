@@ -57,9 +57,8 @@ Website ini dibangun menggunakan React JS, Library Redux, Chakra UI dan lainnya.
 1. Pertama kalian bisa melakukan cloning Web App ini menggunakan URL berikut `https://github.com/idadhamz/generasi-gigih-homework.git`
 2. Mengakses kode Web App di Visual Studio Code dan membuka Terminal (Command Prompt)
 3. Lakukan installasi modules (akan muncul folder `node_modules`) yang digunakan pada Web App ini dengan menjalankan `NPM INSTALL` atau `YARN ADD`
-4. Setelah melakukan installasi, buat file dengan nama `.env.local` sebagai lokasi environment SPOTIFY API ID dan KEY dan isi sesuai dengan SPOTIFY API ID dan KEY akun DEVELOPER API SPOTIFY pengguna anda
-5. Setting **REDIRECT_URL** di file **authSpotify.js** menggantikan isinya dengan localhost anda atau contohnya yaitu `localhost:3000`
-6. Jalankan Web App pada server LOCAL dengan menjalankan `NPM RUN START` atau `YARN START` dan tunggu hingga proses running di server local berhasil. Kemudian akses `localhost:3000` atau port lain sesuai dengan hasil runningnya.
+4. Setelah melakukan installasi, buat file dengan nama `.env.local` sebagai lokasi environment SPOTIFY ID, SPOTIFY KEY dan BASE URL kemudian isi sesuai dengan SPOTIFY API ID, KEY akun DEVELOPER API SPOTIFY pengguna anda dan BASE URL contohnya domain anda atau localhost yaitu `localhost:3000`
+5. Jalankan Web App pada server LOCAL dengan menjalankan `NPM RUN START` atau `YARN START` dan tunggu hingga proses running di server local berhasil. Kemudian akses `localhost:3000` atau port lain sesuai dengan hasil runningnya.
 
 dan taraa Web App berhasil dijalankan pada server local hingga tampil seperti contoh dibawah ini ⬇️
 
