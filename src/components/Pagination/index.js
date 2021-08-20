@@ -102,7 +102,7 @@ const index = ({ data, RenderComponent, pageLimit, dataLimit, isLoading }) => {
             onClick={goToPreviousPage}
             disabled={currentPage === 1 ? true : false}
           >
-            Previous
+            <Text>Previous</Text>
           </Button>
 
           {/* show page numbers */}
@@ -116,7 +116,7 @@ const index = ({ data, RenderComponent, pageLimit, dataLimit, isLoading }) => {
                   : style.paginationItem
               }
             >
-              <span>{item}</span>
+              <Text>{item}</Text>
             </Button>
           ))}
 
@@ -125,7 +125,7 @@ const index = ({ data, RenderComponent, pageLimit, dataLimit, isLoading }) => {
             onClick={goToNextPage}
             disabled={currentPage === pages ? true : false}
           >
-            Next
+            <Text>Next</Text>
           </Button>
         </Box>
       )}

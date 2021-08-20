@@ -22,7 +22,6 @@
 
 .div_pagination button {
     border: 1.5px solid #00A512;
-    color: #000;
 }
 
 .div_pagination button.prev, .div_pagination button.next {
