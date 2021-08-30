@@ -51,7 +51,7 @@ const index = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getSearchTrack(tokenValue, "Love").then((data) => {
+    getSearchTrack(tokenValue, "Indah").then((data) => {
       setTrack(data.tracks.items);
       setIsLoading(false);
     });
